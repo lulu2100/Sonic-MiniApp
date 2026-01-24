@@ -1,101 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Sonic Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini-App</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: #fff;
+    body{margin:0;font-family:Arial;background:#0b0f14;color:#fff}
+    .top{
+      padding:18px 14px 10px;
+      text-align:center;
+      background:linear-gradient(180deg,#0b0f14 0%, #0b0f14 60%, rgba(11,15,20,0) 100%);
+      position:sticky;top:0;z-index:5;
+      backdrop-filter: blur(8px);
     }
-    header {
-      padding: 20px;
-      text-align: center;
-      background: #111;
+    .logo{width:90px;height:90px;border-radius:50%;background:#1a2432;margin:0 auto 8px;overflow:hidden;border:1px solid #243244}
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:900px;margin:10px auto 0;padding:0 14px}
+    select{
+      width:100%;padding:12px 12px;border-radius:999px;
+      border:1px solid #243244;background:#121a24;color:#fff;
+      outline:none;
     }
-    .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #222;
-      margin: 0 auto 10px;
+    .grid{max-width:900px;margin:14px auto;padding:0 14px 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .card{
+      background:#121a24;border:1px solid #243244;border-radius:18px;
+      overflow:hidden;cursor:pointer;position:relative;
+      transition:.12s transform ease;
     }
-    h1 {
-      margin: 10px 0 0;
+    .card:active{transform:scale(.99)}
+    .img{aspect-ratio:1/1;background:#0f1722}
+    .img img{width:100%;height:100%;object-fit:cover;display:block}
+    .tag{
+      position:absolute;top:10px;left:10px;
+      background:rgba(15,23,34,.85);border:1px solid rgba(43,60,81,.9);
+      border-radius:999px;padding:6px 10px;font-size:12px;
+      display:flex;gap:6px;align-items:center
     }
-    .container {
-      padding: 20px;
+    .body{padding:12px}
+    .name{font-size:18px;font-weight:800;margin:0 0 6px}
+    .sub{opacity:.8;font-size:13px;margin:0}
+    .bottom-bar{
+      position:fixed;left:0;right:0;bottom:0;
+      background:#0b0f14;border-top:1px solid #243244;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+      padding:10px 10px env(safe-area-inset-bottom);
+      z-index:10;
     }
-    .product {
-      background: #1a1a1a;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 20px;
-    }
-    .tag {
-      display: inline-block;
-      background: #2a2a2a;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-    .prices {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 15px;
-    }
-    .price {
-      background: #111;
-      border: 1px solid #2b2b2b;
-      border-radius: 20px;
-      padding: 10px;
-      text-align: center;
-      color: #4da3ff;
-      font-weight: bold;
-    }
-    .order {
-      margin-top: 20px;
-      background: #1e90ff;
-      color: #fff;
-      padding: 15px;
-      border-radius: 30px;
-      text-align: center;
-      font-weight: bold;
-    }
+    .tab{opacity:.8;text-align:center;font-size:12px}
+    .tab b{display:block;opacity:1}
+    .spacer{height:70px}
   </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo"></div>
-  <h1>39G</h1>
-</header>
-
-<div class="container">
-
-  <div class="product">
-    <div class="tag">🇲🇦 RIFF • MOUSSEUX</div>
-    <h2>Snoop Dogs</h2>
-
-    <div class="prices">
-      <div class="price">100g • 270€</div>
-      <div class="price">200g • 520€</div>
-      <div class="price">500g • 1250€</div>
-      <div class="price">1000g • 2400€</div>
-    </div>
-
-    <div class="order">
-      Commander via Telegram
-    </div>
+  <div class="top">
+    <div class="logo"><img id="shopLogo" alt=""></div>
+    <div style="font-weight:900;font-size:18px" id="shopName">Mini-App</div>
   </div>
 
-</div>
+  <div class="filters">
+    <select id="catSelect"><option value="">Toutes les catégories</option></select>
+    <select id="brandSelect"><option value="">Toutes les farms</option></select>
+  </div>
 
+  <div class="grid" id="grid"></div>
+  <div class="spacer"></div>
+
+  <div class="bottom-bar">
+    <div class="tab"><b>Menu</b></div>
+    <div class="tab"><b>Infos</b></div>
+    <div class="tab"><b>Canal</b></div>
+    <div class="tab"><b>Contact</b></div>
+  </div>
+
+<script>
+  let DATA;
+  function uniq(arr){ return [...new Set(arr.filter(Boolean))].sort(); }
+
+  function render(){
+    const cat = document.getElementById('catSelect').value;
+    const brand = document.getElementById('brandSelect').value;
+
+    const list = DATA.products.filter(p=>{
+      if(cat && p.category!==cat) return false;
+      if(brand && p.brand!==brand) return false;
+      return true;
+    });
+
+    const grid = document.getElementById('grid');
+    grid.innerHTML = "";
+
+    list.forEach(p=>{
+      const card = document.createElement('div');
+      card.className = "card";
+      card.onclick = ()=> location.href = `product.html?id=${encodeURIComponent(p.id)}`;
+
+      card.innerHTML = `
+        <div class="tag">🏷️ ${p.category || ""}</div>
+        <div class="img"><img src="${p.image || ""}" alt=""></div>
+        <div class="body">
+          <p class="name">${p.name || ""}</p>
+          <p class="sub">🕵️ ${p.brand || ""}</p>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  (async ()=>{
+    const res = await fetch('products.json', {cache:'no-store'});
+    DATA = await res.json();
+
+    document.getElementById('shopName').textContent = DATA.shopName || "Mini-App";
+    // tu peux mettre ton logo via URL dans products.json si tu veux, sinon ça reste vide
+    // document.getElementById('shopLogo').src = DATA.shopLogo || "";
+
+    const cats = uniq(DATA.products.map(p=>p.category));
+    const brands = uniq(DATA.products.map(p=>p.brand));
+
+    const catSelect = document.getElementById('catSelect');
+    cats.forEach(c=>{
+      const o = document.createElement('option'); o.value=c; o.textContent=c;
+      catSelect.appendChild(o);
+    });
+
+    const brandSelect = document.getElementById('brandSelect');
+    brands.forEach(b=>{
+      const o = document.createElement('option'); o.value=b; o.textContent=b;
+      brandSelect.appendChild(o);
+    });
+
+    catSelect.onchange = render;
+    brandSelect.onchange = render;
+
+    render();
+  })();
+</script>
 </body>
 </html>
