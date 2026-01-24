@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produit</title>
+  <style>
+    body{margin:0;font-family:Arial;background:#0b0f14;color:#fff}
+    .wrap{max-width:900px;margin:0 auto;padding:14px 14px 30px}
+    a{color:#9ad1ff;text-decoration:none}
+    .back{display:inline-flex;align-items:center;gap:8px;background:#121a24;border:1px solid #243244;border-radius:999px;padding:10px 12px}
+    .card{margin-top:12px;background:#121a24;border:1px solid #243244;border-radius:18px;overflow:hidden}
+    .video{background:#000}
+    video{width:100%;height:auto;display:block}
+    .content{padding:14px}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-flex;align-items:center;gap:6px;background:#0f1722;border:1px solid #2b3c51;border-radius:999px;padding:6px 10px;font-size:12px;opacity:.95}
+    h1{margin:10px 0 6px;font-size:28px}
+    .desc{opacity:.85;white-space:pre-line;line-height:1.4}
+    .variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+    .btn{background:#0f1722;border:1px solid #2b3c51;border-radius:999px;padding:12px 14px;color:#9ad1ff;font-weight:700;cursor:pointer}
+    .cta{margin-top:12px;background:#2b8cff;border:0;color:#fff;border-radius:999px;padding:14px 16px;font-weight:800;width:100%;cursor:pointer}
+    @media(max-width:420px){ .variants{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← Retour</a>
+
+    <div class="card">
+      <div class="video">
+        <video id="vid" controls playsinline></video>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="pill" id="catPill"></div>
+          <div class="pill" id="brandPill"></div>
+        </div>
+
+        <h1 id="name"></h1>
+        <div class="desc" id="desc"></div>
+
+        <div class="variants" id="variants"></div>
+
+        <button class="cta" id="orderBtn">Commander via Telegram</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let DATA, product;
+    function qs(k){ return new URLSearchParams(location.search).get(k); }
+    function formatPrice(n){ return `${n}€`; }
+    function telegramOrderLink(payload){
+      const bot = (DATA.botUsername || "").replace("@","");
+      return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
+    }
+
+    (async ()=>{
+      const res = await fetch('products.json', {cache:'no-store'});
+      DATA = await res.json();
+
+      const id = qs('id');
+      product = DATA.products.find(p=>p.id===id);
+
+      if(!product){
+        document.body.innerHTML = "<div style='padding:20px'>Produit introuvable. <a href='index.html'>Retour</a></div>";
+        return;
+      }
+
+      document.getElementById('vid').src = product.video || "";
+      document.getElementById('catPill').textContent = product.category || "";
+      document.getElementById('brandPill').textContent = product.brand || "";
+      document.getElementById('name').textContent = product.name || "";
+      document.getElementById('desc').textContent = product.description || "";
+
+      const variants = document.getElementById('variants');
+      variants.innerHTML = "";
+
+      product.variants.forEach(v=>{
+        const b = document.createElement('button');
+        b.className = "btn";
+        b.textContent = `${v.label}  ${formatPrice(v.price)}`;
+        b.onclick = ()=>{
+          const payload = `order_${product.id}_${v.label}_${v.price}`;
+          window.open(telegramOrderLink(payload), "_blank");
+        };
+        variants.appendChild(b);
+      });
+
+      document.getElementById('orderBtn').onclick = ()=>{
+        const payload = `order_${product.id}`;
+        window.open(telegramOrderLink(payload), "_blank");
+      };
+    })();
+  </script>
+</body>
+</html>
