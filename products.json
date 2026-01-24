@@ -1,0 +1,21 @@
+{
+  "shopName": "39G",
+  "botUsername": "SonicShop_Officiel_Bot",
+  "products": [
+    {
+      "id": "snoop-dogs",
+      "name": "Snoop Dogs",
+      "brand": "RIFF",
+      "category": "MOUSSEUX",
+      "image": "https://via.placeholder.com/600x400.png?text=Snoop+Dogs",
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "description": "La fusée de mousseux pour vous régalez comme d’habitude 🚀",
+      "variants": [
+        { "label": "100g", "price": 270 },
+        { "label": "200g", "price": 520 },
+        { "label": "500g", "price": 1250 },
+        { "label": "1000g", "price": 2400 }
+      ]
+    }
+  ]
+}
