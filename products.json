@@ -6,7 +6,7 @@
       "id": "london-pound-cake",
       "name": "London Pound Cake",
       "brand": "Cali-Californienne",
-      "category": "WEED🇺🇸",
+      "category": "WEED 🇺🇸",
       "image": "image0.jpeg",
       "video": "https://lulu2100.github.io/Sonic-MiniApp/video%20snc%201.mp4",
       "description": "- Parent : London Pound Cake x Ruderalis\n- Génétique : Indica +60%\n- Arômes : Fruité, Citronné\n- THC : Ultra Élevé\n- Effet : se distingue l'euphorie, qui invite à interagir par sa bonne composante sociale.\n\nWeed californienne 🇺🇸 tout droit des États-Unis 🇺🇸 !!!\n\nÀ ne pas comparer avec de la weed basique !\n\nEssayer, c’est l’adopter 🤩🙌",
@@ -32,6 +32,21 @@
         { "label": "10g", "price": 90 },
         { "label": "25g", "price": 200 },
         { "label": "50g", "price": 340 }
+      ]
+    },
+    {
+      "id": "hash-lemon-haze",
+      "name": "Lemon Haze",
+      "brand": "Farm Hash Pirate Connexion",
+      "category": "73u Frozen",
+      "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/d3fe8e017948890049cc9808b9b099ce87820f6a/IMAGE%25202026-01-25%252004%253A21%253A27.jpg",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/c4295b2e8370d2ebaef72e68367cea24d40fa560/IMG_9696.MP4",
+      "description": "Une vraie dinguerie : texture crémeuse, bien travaillée, qui montre direct la qualité premium ✨\n\nUn profil inspiré des meilleures lignées de la farm Hash Pirate Connexion.\n\n👅 Goût : frais et fruité, mêlant notes citronnées et touche végétale légère, avec un petit twist sucré-acidulé qui reste en bouche 😌\n\n💨 Résine dense, opaque, raffinée, qui concentre le meilleur de cette catégorie ⭐",
+      "variants": [
+        { "label": "2g", "price": 30 },
+        { "label": "5g", "price": 60 },
+        { "label": "10g", "price": 100 },
+        { "label": "25g", "price": 220 }
       ]
     }
   ]
