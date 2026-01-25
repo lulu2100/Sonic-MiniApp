@@ -48,6 +48,21 @@
         { "label": "10g", "price": 100 },
         { "label": "25g", "price": 220 }
       ]
+    },
+    {
+      "id": "donkey-butter-kgf",
+      "name": "Donkey Butter 🦊",
+      "brand": "Kilogramme Farm 🦊",
+      "category": "73u Frozen",
+      "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b8d8e26c568907866a31d38d8afbbb6702cb0670/IMAGE%202026-01-25%2004%3A49%3A37.jpg",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/ab459f1711ca385a97fe3b3565b4236db866deab/IMG_9699.MP4",
+      "description": "Un profil inspiré des meilleures lignées Gorilla 🦍\n\n💨 Texture : rendu propre et raffiné, une résine qui s’effrite toute seule, fine et veloutée sous les doigts, souple et agréable, montrant un vrai travail de filtration ✨\n\n🌿 Odeur : bien végétale, fraîche et authentique, qui rappelle directement la plante de qualité.\n\n👅 Goût : doux et propre, maîtrisé, avec des notes weed, fruitées et légèrement sucrées.\n\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité.\n\nProduit provenant de chez By KGF Officiel.",
+      "variants": [
+        { "label": "2g", "price": 30 },
+        { "label": "5g", "price": 60 },
+        { "label": "10g", "price": 100 },
+        { "label": "25g", "price": 220 }
+      ]
     }
   ]
 }
