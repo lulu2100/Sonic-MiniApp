@@ -40,7 +40,7 @@
       "brand": "Farm Hash Pirate Connexion",
       "category": "73u Frozen",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/d3fe8e017948890049cc9808b9b099ce87820f6a/IMAGE%202026-01-25%2004%3A21%3A27.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/c4295b2e8370d2ebaef72e68367cea24d40fa560/IMG_9696.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/c4295b32d96501da5f85d9fc89ebc9f00b6cd7/IMG_9696.MP4",
       "description": "Une vraie dinguerie : texture crémeuse, bien travaillée, qui montre direct la qualité premium ✨\n\nUn profil inspiré des meilleures lignées de la farm Hash Pirate Connexion.\n\n👅 Goût : frais et fruité, mêlant notes citronnées et touche végétale légère, avec un petit twist sucré-acidulé qui reste en bouche 😌\n\n💨 Résine dense, opaque, raffinée, qui concentre le meilleur de cette catégorie ⭐",
       "variants": [
         { "label": "2g", "price": 30 },
@@ -56,12 +56,46 @@
       "category": "73u Frozen",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b8d8e26c568907866a31d38d8afbbb6702cb0670/IMAGE%202026-01-25%2004%3A49%3A37.jpg",
       "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/ab459f1711ca385a97fe3b3565b4236db866deab/IMG_9699.MP4",
-      "description": "Un profil inspiré des meilleures lignées Gorilla 🦍\n\n💨 Texture : rendu propre et raffiné, une résine qui s’effrite toute seule, fine et veloutée sous les doigts, souple et agréable, montrant un vrai travail de filtration ✨\n\n🌿 Odeur : bien végétale, fraîche et authentique, qui rappelle directement la plante de qualité.\n\n👅 Goût : doux et propre, maîtrisé, avec des notes weed, fruitées et légèrement sucrées.\n\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité.\n\nProduit provenant de chez By KGF Officiel.",
+      "description": "Un profil inspiré des meilleures lignées Gorilla 🦍\n\n💨 Texture : rendu propre et raffiné, une résine qui s’effrite toute seule, fine et veloutée sous les doigts ✨\n\n🌿 Odeur : bien végétale, fraîche et authentique.\n\n👅 Goût : doux et propre, notes weed, fruitées et légèrement sucrées.\n\n⭐ Résine premium, pure et soignée.\n\nProduit provenant de chez By KGF Officiel.",
       "variants": [
         { "label": "2g", "price": 30 },
         { "label": "5g", "price": 60 },
         { "label": "10g", "price": 100 },
         { "label": "25g", "price": 220 }
+      ]
+    },
+    {
+      "id": "mousse-premium-connectionery",
+      "name": "Mousse Premium",
+      "brand": "By Connectionery",
+      "category": "Mousseux – Première Presse",
+      "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/de520b584c222ff3a65748f0bcde6c3b2b56e562/mousseuxpremiers.jpg",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8c608aabff9107c62142cfb15d5fc41807c97228/mousseuxpremierspresse.MP4",
+      "description": "La qualité 2026 se ressent direct By Connectionery 🔥\n\nRésine jaune doré, texture mousseuse, légère et ultra agréable.\n\nProfil terpénique riche : floral, herbacé et légèrement citronné 🍋\n\nEffet relaxant profond, idéal fin de journée 😌\n\nProduit By Connectionery Farm.",
+      "variants": [
+        { "label": "2.2g", "price": 20 },
+        { "label": "5g", "price": 40 },
+        { "label": "10g", "price": 60 },
+        { "label": "25g", "price": 130 },
+        { "label": "50g", "price": 220 },
+        { "label": "100g", "price": 350 }
+      ]
+    },
+    {
+      "id": "mousseux-gelato-es",
+      "name": "Gelato",
+      "brand": "Espagne 🇪🇸",
+      "category": "Mousseux",
+      "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b5ca6b8ebd4aabdfb6391cbebce39a0e68ccc2a9/mousseux.jpg",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/575fada07f4a2e368ffa7c7b479f60297c6f1759/mousseux.MP4",
+      "description": "Mousseux Gelato au rendu propre ✨\n\nTexture mousseuse, légère, très agréable 👌\n\nNotes florales, herbacées et weed.\n\nEffet détente efficace 😌\n\nOrigine Espagne 🇪🇸.",
+      "variants": [
+        { "label": "2.2g", "price": 20 },
+        { "label": "5g", "price": 40 },
+        { "label": "10g", "price": 50 },
+        { "label": "25g", "price": 100 },
+        { "label": "50g", "price": 190 },
+        { "label": "100g", "price": 280 }
       ]
     }
   ]
