@@ -19,4 +19,21 @@
       ]
     }
   ]
+},
+,
+{
+  "id": "g13-skunk-1",
+  "name": "G13 x Skunk #1",
+  "brand": "Hollandaise 🇳🇱",
+  "category": "WEED 🇳🇱",
+  "image": "image-temp.jpeg",
+  "video": "",
+  "description": "- Parent : G13 x Skunk #1\n- Génétique : Indica +90%\n- Arômes : Sucrées, Floral 🌸\n- THC : 25%\n- Effet : Son effet sera fortement relaxant 😴\n\nWeed Hollandaise 🇳🇱\n\nSimple, efficace, radicale 🙌",
+  "variants": [
+    { "label": "2g", "price": 20 },
+    { "label": "5g", "price": 50 },
+    { "label": "10g", "price": 90 },
+    { "label": "25g", "price": 200 },
+    { "label": "50g", "price": 340 }
+  ]
 }
