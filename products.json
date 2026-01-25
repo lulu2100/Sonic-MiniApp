@@ -64,14 +64,15 @@
         { "label": "25g", "price": 220 }
       ]
     },
+
     {
       "id": "bubblegum-nl",
       "name": "BubbleGum",
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bubblegumweed.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/weedbubblegum.MP4",
-      "description": "BubbleGum 🍬\n\nVariété joyeuse, créative et sociale 🥳",
+      "video": "https://sonic-miniapp.vercel.app/videos/weedbubblegum.mp4",
+      "description": "- Parent : Gelato x Indiana Bubble Gum\n- Génétique : Indica +60%\n- Arômes : Fruité, Milky & Crémeux, Sucré 🍬\n- THC : Très élevé (25–30%)\n- Effet : high joyeux et énergisant, favorisant créativité et échanges 🥳\n\nWeed Hollandaise 🇳🇱\n\nUne variété pleine de saveur et de bonnes vibrations 🫨",
       "variants": [
         { "label": "2g", "price": 20 },
         { "label": "5g", "price": 50 },
@@ -86,8 +87,8 @@
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bazookabig.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/a1c0c0582c48d7e301f41ce3bfa60f4b9af6f16b/bazookaweed9722.MP4",
-      "description": "Big Bazooka 💣\n\nPuissante et ultra relaxante 😴",
+      "video": "https://sonic-miniapp.vercel.app/videos/bazookaweed9722.mp4",
+      "description": "- Parent : Big Bud x Jack Herer\n- Génétique : Indica +60%\n- Arômes : Fruité, citronné 🍋, agrumes et sucré 🍬\n- THC : Très élevé (25–30%)\n- Effet : montée rapide suivie d’une relaxation profonde physique et mentale 🫠😴\n\nWeed Hollandaise 🇳🇱\n\nParfaite pour se poser et dormir lourd 🫨",
       "variants": [
         { "label": "2g", "price": 20 },
         { "label": "5g", "price": 50 },
