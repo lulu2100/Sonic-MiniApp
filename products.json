@@ -8,13 +8,18 @@
       "brand": "Cali-Californienne",
       "category": "WEED 🇺🇸",
       "image": "image0.jpeg",
-      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
-      "description": "La fusée de mousseux pour vous régalez comme d’habitude 🚀",
+      "video": "https://lulu2100.github.io/Sonic-MiniApp/video%20snc%201.mp4",
+      "description": "-Parent : London Pound Cake x Ruderalis 
+                      -Génétique : Indica +60%
+                      -Arômes : Fruité, Citronné
+                      -THC : Ultra Élevé 
+                      -Effet : se distingue l'euphorie, qui invite à interagir par sa bonne composante sociale.🚀
+      Weed californienne 🇺🇸 tout droit des États Unis 🇺🇸!!! à ne pas comparer avec de la weed basic !essayer c'est l'adopter 🤩🙌 ",
       "variants": [
-        { "label": "100g", "price": 270 },
-        { "label": "200g", "price": 520 },
-        { "label": "500g", "price": 1250 },
-        { "label": "1000g", "price": 2400 }
+        { "label": "2g", "price": 30 },
+        { "label": "5g", "price": 70 },
+        { "label": "10g", "price": 130 },
+        { "label": "25g", "price": 250 }
       ]
     }
   ]
