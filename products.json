@@ -15,7 +15,7 @@
         { "label": "10g", "price": 30 },
         { "label": "25g", "price": 70 },
         { "label": "50g", "price": 130 },
-        { "label": "100g", "price": 250 },
+        { "label": "100g", "price": 250 }
       ]
     }
   ]
