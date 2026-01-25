@@ -40,7 +40,7 @@
       "brand": "Farm Hash Pirate Connexion",
       "category": "73u Frozen",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/d3fe8e017948890049cc9808b9b099ce87820f6a/IMAGE%202026-01-25%2004%3A21%3A27.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/c4295b32d96501da5f85d9fc89ebc9f00b6cd7/IMG_9696.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/c4295b2e8370d2ebaef72e68367cea24d40fa560/IMG_9696.MP4",
       "description": "Résine premium 🍋\n\nTexture crémeuse, goût frais et fruité.",
       "variants": [
         { "label": "2g", "price": 30 },
@@ -70,7 +70,7 @@
       "brand": "By Connectionery",
       "category": "Mousseux – Première Presse",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/de520b584c222ff3a65748f0bcde6c3b2b56e562/mousseuxpremiers.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8c608aabff9107c62142cfb15d5fc41807c97228/mousseuxpremierspresse.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/575fada07f4a2e368ffa7c7b479f60297c6f1759/mousseux.MP4",
       "description": "Résine mousseuse premium ✨\n\nEffet relaxant profond 😌",
       "variants": [
         { "label": "2.2g", "price": 20 },
@@ -87,7 +87,7 @@
       "brand": "Espagne 🇪🇸",
       "category": "Mousseux",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b5ca6b8ebd4aabdfb6391cbebce39a0e68ccc2a9/mousseux.jpg",
-      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/575fada07f4a2e368ffa7c7b479f60297c6f1759/mousseux.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/575fada07f4a2e368ffa7c7b479f60297c6f1759/mousseux.MP4"
       "description": "Mousseux Gelato ✨\n\nOrigine Espagne 🇪🇸",
       "variants": [
         { "label": "2.2g", "price": 20 },
@@ -104,7 +104,7 @@
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bubblegumweed.jpg",
-      "video": "https://sonic-miniapp.vercel.app/videos/weedbubblegum.mp4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/weedbubblegum.MP4",
       "description": "BubbleGum 🍬\n\nVariété joyeuse et créative 🥳",
       "variants": [
         { "label": "2g", "price": 20 },
@@ -120,7 +120,7 @@
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bazookabig.jpg",
-      "video": "https://sonic-miniapp.vercel.app/videos/bazookaweed9722.mp4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/a1c0c0582c48d7e301f41ce3bfa60f4b9af6f16b/bazookaweed9722.MP4",
       "description": "Big Bazooka 💣\n\nRelaxation lourde 😴",
       "variants": [
         { "label": "2g", "price": 20 },
