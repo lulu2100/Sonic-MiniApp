@@ -1,13 +1,13 @@
 {
-  "shopName": "39G",
+  "shopName": "SonicCoffee",
   "botUsername": "SonicShop_Officiel_Bot",
   "products": [
     {
-      "id": "snoop-dogs",
-      "name": "Snoop Dogs",
-      "brand": "RIFF",
-      "category": "MOUSSEUX",
-      "image": "https://via.placeholder.com/600x400.png?text=Snoop+Dogs",
+      "id": "London Pound Cake",
+      "name": "London Pound Cake",
+      "brand": "Cali-Californienne",
+      "category": "WEED 🇺🇸",
+      "image": "",
       "video": "https://www.w3schools.com/html/mov_bbb.mp4",
       "description": "La fusée de mousseux pour vous régalez comme d’habitude 🚀",
       "variants": [
