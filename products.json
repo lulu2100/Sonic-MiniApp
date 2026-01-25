@@ -3,22 +3,16 @@
   "botUsername": "SonicShop_Officiel_Bot",
   "products": [
     {
-      "id": "London Pound Cake",
+      "id": "london-pound-cake",
       "name": "London Pound Cake",
-      "brand": "Cali-Californienne",
-      "category": "WEED 🇺🇸",
+      "brand": "Cali-California",
+      "category": "WEED",
       "image": "image0.jpeg",
       "video": "https://lulu2100.github.io/Sonic-MiniApp/video%20snc%201.mp4",
-      "description": "-Parent : London Pound Cake x Ruderalis 
-                      -Génétique : Indica +60%
-                      -Arômes : Fruité, Citronné
-                      -THC : Ultra Élevé 
-                      -Effet : se distingue l'euphorie, qui invite à interagir par sa bonne composante sociale.🚀
-      Weed californienne 🇺🇸 tout droit des États Unis 🇺🇸!!! à ne pas comparer avec de la weed basic !essayer c'est l'adopter 🤩🙌 ",
+      "description": "Génétique : Indica 60%\nArômes : Fruité, citronné\nTHC : Élevé\nEffet : Euphorie sociale et détente\nWeed californienne import USA",
       "variants": [
-        { "label": "2g", "price": 30 },
-        { "label": "5g", "price": 70 },
-        { "label": "10g", "price": 130 },
+        { "label": "5g", "price": 30 },
+        { "label": "10g", "price": 70 },
         { "label": "25g", "price": 250 }
       ]
     }
