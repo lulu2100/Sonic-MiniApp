@@ -74,7 +74,7 @@
       "brand": "By Connectionery",
       "category": "Mousseux – Première Presse",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/de520b584c222ff3a65748f0bcde6c3b2b56e562/mousseuxpremiers.jpg",
-      "video": "https://sonic-mini-app.vercel.app/mousseuxpremierspresse.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/13b14138167d1cec6bf8f0bb697f14ef0b9d5f24/Mouspresse9712.MP4",
       "description": "La qualité 2026 se ressent direct By Connectionery 🔥\n\nRésine jaune doré, texture mousseuse, légère et ultra agréable.\n\nProfil terpénique riche : floral, herbacé et légèrement citronné 🍋\n\nEffet relaxant profond, idéal fin de journée 😌\n\nProduit By Connectionery Farm.",
       "variants": [
         { "label": "2.2g", "price": 20 },
@@ -92,7 +92,7 @@
       "brand": "Espagne 🇪🇸",
       "category": "Mousseux",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b5ca6b8ebd4aabdfb6391cbebce39a0e68ccc2a9/mousseux.jpg",
-      "video": "https://cdn.jsdelivr.net/gh/lulu2100/Sonic-MiniApp@575fada07f4a2e368ffa7c7b479f60297c6f1759/mousseux.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8a8d7fea0e81e7d6f2e55aa494924789235cdcbf/Mouss9706.MP4",
       "description": "Mousseux Gelato au rendu propre ✨\n\nTexture mousseuse, légère, très agréable 👌\n\nNotes florales, herbacées et weed.\n\nEffet détente efficace 😌\n\nOrigine Espagne 🇪🇸.",
       "variants": [
         { "label": "2.2g", "price": 20 },
@@ -110,7 +110,7 @@
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bubblegumweed.jpg",
-      "video": "https://cdn.jsdelivr.net/gh/lulu2100/Sonic-MiniApp@8e4a6b36ada464c99409e27ab4b5651cdd23c54b/weedbubblegum.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/f0585735073139525d96746f76abc2a36cdd6e85/bubblegum9720.MP4",
       "description": "- Parent : Gelato x Indiana Bubble Gum\n- Génétique : Indica +60%\n- Arômes : Fruité, Milky & Crémeux, Sucré 🍬\n- THC : Très élevé (25–30%)\n- Effet : high joyeux et énergisant, qui éveille la créativité et encourage la conversation. Idéal pour les réunions sociales ou les activités artistiques 🥳\n\nWeed Hollandaise 🇳🇱\n\nUne variété pour ceux qui recherchent de la saveur et de bonnes vibrations à chaque bouffée 🫨",
       "variants": [
         { "label": "2g", "price": 20 },
@@ -127,7 +127,7 @@
       "brand": "Hollandaise 🇳🇱",
       "category": "WEED 🇳🇱",
       "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/8e4a6b36ada464c99409e27ab4b5651cdd23c54b/Bazookabig.jpg",
-      "video": "https://cdn.jsdelivr.net/gh/lulu2100/Sonic-MiniApp@a1c0c0582c48d7e301f41ce3bfa60f4b9af6f16b/bazookaweed9722.MP4",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/13b14138167d1cec6bf8f0bb697f14ef0b9d5f24/Bigverte9722.MP4",
       "description": "- Parent : Big Bud x Jack Herer\n- Génétique : Indica +60%\n- Arômes : Fruité, citronné 🍋, agrumes et sucré 🍬\n- THC : Très élevé (25–30%)\n- Effet : montée rapide avec une poussée cérébrale intense, menant à une relaxation profonde aussi bien physique que mentale 🫠😴\n\nWeed Hollandaise 🇳🇱\n\nUne variété idéale pour ceux qui recherchent de la saveur et un sommeil bien lourd 🫨",
       "variants": [
         { "label": "2g", "price": 20 },
