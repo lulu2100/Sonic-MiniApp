@@ -216,4 +216,55 @@
     { "label": "25g", "price": 140 },
     { "label": "50g", "price": 220 }
   ]
+},
+    
+  {
+  "id": "marlboro-fr",
+  "name": "Marlboro Fr",
+  "brand": "Marlboro Fr",
+  "category": "Clope",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/1f11734f5bf18cd6b63b144011f64cec18fbb576/IMAGE%202026-01-27%2002%3A30%3A34.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/1f11734f5bf18cd6b63b144011f64cec18fbb576/IMG_9746.MP4",
+  "description": "Marlboro Française\nRien à voir avec les Rouge ou Smocking la team 👌 !\n\nMeilleure Qualité ⚠️\n- Tirage parfait\n- Tabac ne se vide pas",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+},
+    
+ {
+  "id": "marlboro-red",
+  "name": "Marlboro Oeil 👁️ - Bebe",
+  "brand": "Marlboro Red",
+  "category": "Clope",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/ce690636c930738ba5f1ee08a6b950829444a799/IMAGE%202026-01-27%2002%3A38%3A49.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/ce690636c930738ba5f1ee08a6b950829444a799/IMG_9709.MP4",
+  "description": "Marlboro Oeil 👁️ et Bebe 👶\nRien à voir avec les Fr ou Gold 👌 !\n\nQualité plus basse que les Fr ⚠️",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+},
+    
+  {
+  "id": "tabac-luxembourg",
+  "name": "Winston Interval",
+  "brand": "Winston Interval",
+  "category": "Tabac",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/29f522c5f49a07b1395c075e713563a45607e876/IMAGE%202026-01-27%2002%3A54%3A55.jpg",
+  "video": null,
+  "description": "Seau Winston 250g\nPot Interval 250g\n\nQualité 100% Luxembourg 🇱🇺 ⚠️ les prix peuvent changer en fonction des hausses budgétaires luxembourgeoises ⚠️",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+ }
+] 
 }
+,
