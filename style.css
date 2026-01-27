@@ -1,8 +1,11 @@
 body{
   margin:0;
-  font-family:'Poppins', Arial, sans-serif;
-  background:#0b0f14;
+  font-family:Arial;
   color:#fff;
+  background: 
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.85)),
+    url("https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/3e074d4afb4fba0813d4db29af1df57e8f3b85b0/IMAGE%202026-01-28%2000%3A47%3A45.jpg")
+    center/cover no-repeat fixed;
 }
     .top{
       padding:18px 14px 10px;
