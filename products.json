@@ -168,4 +168,18 @@
     { "label": "50g", "price": 220 }
   ]
  },
-}
+{
+  "id": "papaya-ak47",
+  "name": "Papaya",
+  "brand": "Farm Ak47",
+  "category": "220u/90u Static",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/77b96a038ae024938718d1b09465d9a0457e127d/IMAGE%202026-01-27%2001%3A06%3A53.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/785453d255d22738c30463d9a5ab56b5fc02bf33/IMG_9749.MP4",
+  "description": "-Texture : rendu propre et raffiné, une résine exceptionnelle Sec et Dur, agréable, qui montre un vrai travail de filtration 220u/90u✨.\n-Arômes :  De fraîcheur et authentique,.\n-Gout : Fruitée, Papaye avec un geste citronnée🍋 .\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité Premium \n\nTous Droits d’une nouvelle Farm AK-47 .\n\n",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+},
