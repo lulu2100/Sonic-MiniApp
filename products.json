@@ -201,3 +201,19 @@
     { "label": "50g", "price": 220 }
   ]
 },
+    
+ {
+  "id": "motor-breath",
+  "name": "Motor Breath",
+  "brand": "Trichome Valley",
+  "category": "Fresh Frozen",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/516bde191367555c2e1adb7ee07a7ac89b883d94/IMAGE%202026-01-27%2001%3A40%3A38.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/516bde191367555c2e1adb7ee07a7ac89b883d94/IMG_9769.MP4",
+  "description": "🔥 🏔️Trichome Valley Farm d’exception pour les fin connaisseurs de vrai Hash ! qui nous sort ces magnifiques Frozen Prenium 2k26 !! Un mélange de saveurs et d’agressivité, ce magnifique Fresh Frozen 🥶 qu’est le Motor Breath va vous faire chavirer ! 🌬️\n\n- Texture : rendu propre et raffiné, une exceptionnelle fine et souple, agréable, une résine qui montre un vrai travail de filtration ✨.\n- Arômes : de fleurs plante fraîche et authentique weed .\n- Goût : c’est doux, fruitée 🍓, sucrée, avec un goût naturel qui tape juste comme on l’aime !\n\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité, rappelant le hash traditionnel.",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+}
