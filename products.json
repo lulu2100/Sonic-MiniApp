@@ -153,6 +153,7 @@
     { "label": "50g", "price": 220 }
    ]
     },
+    
 {
   "id": "apple-banana",
   "name": "Apple-Banana",
@@ -168,6 +169,7 @@
     { "label": "50g", "price": 220 }
   ]
  },
+    
 {
   "id": "papaya-ak47",
   "name": "Papaya",
