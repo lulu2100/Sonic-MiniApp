@@ -1,4 +1,9 @@
-body{margin:0;font-family:Arial;background:#0b0f14;color:#fff}
+body{
+  margin:0;
+  font-family:'Poppins', Arial, sans-serif;
+  background:#0b0f14;
+  color:#fff;
+}
     .top{
       padding:18px 14px 10px;
       text-align:center;
