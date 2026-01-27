@@ -151,7 +151,21 @@
     { "label": "10g", "price": 70 },
     { "label": "25g", "price": 140 },
     { "label": "50g", "price": 220 }
+   ]
+    },
+{
+  "id": "apple-banana",
+  "name": "Apple-Banana",
+  "brand": "Farm Ak47",
+  "category": "220u/90u Static",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/bdc9427b81f4cdaab1a881669133da4462f2c3ae/IMAGE%202026-01-27%2000%3A46%3A51.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/bdc9427b81f4cdaab1a881669133da4462f2c3ae/IMG_9747.MP4",
+  "description": "-Texture : rendu propre et raffiné, une résine exceptionnelle Sec et Dur, agréable, qui montre un vrai travail de filtration 220u/90u✨.\n-Arômes : de fleurs plante fraîche et authentique,.\n-Gout : Fruitée, Pomme avec un goût de Banana qui tape juste.\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité Premium \n\nTous Droits d’une nouvelle Farm AK-47 .\n\n",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
   ]
-}
-]
+ },
 }
