@@ -5,17 +5,17 @@
     {
       "id": "london-pound-cake",
       "name": "London Pound Cake",
-      "brand": "Cali-Californienne",
+      "brand": "Cali-Californienne🇺🇸",
       "category": "WEED 🇺🇸",
       "image": "image0.jpeg",
       "video": "https://lulu2100.github.io/Sonic-MiniApp/video%20snc%201.mp4",
       "description": "- Parent : London Pound Cake x Ruderalis\n- Génétique : Indica +60%\n- Arômes : Fruité, Citronné\n- THC : Ultra Élevé\n- Effet : se distingue l'euphorie, qui invite à interagir par sa bonne composante sociale.\n\nWeed californienne 🇺🇸 tout droit des États-Unis 🇺🇸 !!!\n\nÀ ne pas comparer avec de la weed basique !\n\nEssayer, c’est l’adopter 🤩🙌",
       "variants": [
+        { "label": "1g", "price": 20 },
         { "label": "2g", "price": 30 },
         { "label": "5g", "price": 70 },
         { "label": "10g", "price": 120 },
-        { "label": "25g", "price": 280 },
-        { "label": "50g", "price": 450 }
+        { "label": "25g", "price": 240 }
       ]
     },
 
@@ -29,10 +29,10 @@
       "description": "- Parent : G13 x Skunk #1\n- Génétique : Indica +90%\n- Arômes : Sucrées, Floral 🌸\n- THC : 25%\n- Effet : Son effet sera fortement relaxant 😴\n\nWeed Hollandaise 🇳🇱\n\nSimple, efficace, radicale 🙌",
       "variants": [
         { "label": "2g", "price": 20 },
-        { "label": "5g", "price": 50 },
+        { "label": "5,5g", "price": 50 },
         { "label": "10g", "price": 90 },
-        { "label": "25g", "price": 200 },
-        { "label": "50g", "price": 340 }
+        { "label": "25g", "price": 180 },
+        { "label": "50g", "price": 300 }
       ]
     },
 
@@ -45,10 +45,10 @@
       "video": "https://cdn.jsdelivr.net/gh/lulu2100/Sonic-MiniApp@c4295b2e8370d2ebaef72e68367cea24d40fa560/IMG_9696.MP4",
       "description": "Une vraie dinguerie : texture crémeuse, bien travaillée, qui montre direct la qualité premium ✨\n\nUn profil inspiré des meilleures lignées de la farm Hash Pirate Connexion.\n\n👅 Goût : frais et fruité, mêlant notes citronnées et touche végétale légère, avec un petit twist sucré-acidulé qui reste en bouche 😌\n\n💨 Résine dense, opaque, raffinée, qui concentre le meilleur de cette catégorie ⭐",
       "variants": [
-        { "label": "2g", "price": 30 },
-        { "label": "5g", "price": 60 },
-        { "label": "10g", "price": 100 },
-        { "label": "25g", "price": 220 }
+        { "label": "1,5g", "price": 20 },
+        { "label": "5g", "price": 40 },
+        { "label": "10g", "price": 70 },
+        { "label": "25g", "price": 140 }
       ]
     },
 
@@ -61,10 +61,10 @@
       "video": "https://cdn.jsdelivr.net/gh/lulu2100/Sonic-MiniApp@ab459f1711ca385a97fe3b3565b4236db866deab/IMG_9699.MP4",
       "description": "Un profil inspiré des meilleures lignées Gorilla 🦍\n\n💨 Texture : rendu propre et raffiné, une résine qui s’effrite toute seule, fine et veloutée sous les doigts ✨\n\n🌿 Odeur : bien végétale, fraîche et authentique.\n\n👅 Goût : doux et propre, notes weed, fruitées et légèrement sucrées.\n\n⭐ Résine premium, pure et soignée.\n\nProduit provenant de chez By KGF Officiel.",
       "variants": [
-        { "label": "2g", "price": 30 },
-        { "label": "5g", "price": 60 },
-        { "label": "10g", "price": 100 },
-        { "label": "25g", "price": 220 }
+        { "label": "1,5g", "price": 20 },
+        { "label": "5g", "price": 40 },
+        { "label": "10g", "price": 70 },
+        { "label": "25g", "price": 140 }
       ]
     },
 
@@ -77,12 +77,12 @@
       "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/82f7c8a812215525206ee44e22df589f2bcbb559/IMG_9712.MP4",
       "description": "La qualité 2026 se ressent direct By Connectionery 🔥\n\nRésine jaune doré, texture mousseuse, légère et ultra agréable.\n\nProfil terpénique riche : floral, herbacé et légèrement citronné 🍋\n\nEffet relaxant profond, idéal fin de journée 😌\n\nProduit By Connectionery Farm.",
       "variants": [
-        { "label": "2.2g", "price": 20 },
-        { "label": "5g", "price": 40 },
+        { "label": "3g", "price": 20 },
+        { "label": "6g", "price": 40 },
         { "label": "10g", "price": 60 },
-        { "label": "25g", "price": 130 },
-        { "label": "50g", "price": 220 },
-        { "label": "100g", "price": 350 }
+        { "label": "25g", "price": 110 },
+        { "label": "50g", "price": 160 },
+        { "label": "100g", "price": 280 }
       ]
     },
 
@@ -95,12 +95,12 @@
       "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/af615e106bec407011feb9d960cd1a531f01ee8f/IMG_9706.MP4",
       "description": "Mousseux Gelato au rendu propre ✨\n\nTexture mousseuse, légère, très agréable 👌\n\nNotes florales, herbacées et weed.\n\nEffet détente efficace 😌\n\nOrigine Espagne 🇪🇸.",
       "variants": [
-        { "label": "2.2g", "price": 20 },
-        { "label": "5g", "price": 40 },
+        { "label": "3,5g", "price": 20 },
+        { "label": "7g", "price": 40 },
         { "label": "10g", "price": 50 },
-        { "label": "25g", "price": 100 },
-        { "label": "50g", "price": 190 },
-        { "label": "100g", "price": 280 }
+        { "label": "25g", "price": 90 },
+        { "label": "50g", "price": 140 },
+        { "label": "100g", "price": 250 }
       ]
     },
 
@@ -114,10 +114,10 @@
       "description": "- Parent : Gelato x Indiana Bubble Gum\n- Génétique : Indica +60%\n- Arômes : Fruité, Milky & Crémeux, Sucré 🍬\n- THC : Très élevé (25–30%)\n- Effet : high joyeux et énergisant, qui éveille la créativité et encourage la conversation. Idéal pour les réunions sociales ou les activités artistiques 🥳\n\nWeed Hollandaise 🇳🇱\n\nUne variété pour ceux qui recherchent de la saveur et de bonnes vibrations à chaque bouffée 🫨",
       "variants": [
         { "label": "2g", "price": 20 },
-        { "label": "5g", "price": 50 },
+        { "label": "5,5g", "price": 50 },
         { "label": "10g", "price": 90 },
-        { "label": "25g", "price": 200 },
-        { "label": "50g", "price": 340 }
+        { "label": "25g", "price": 180 },
+        { "label": "50g", "price": 300 }
       ]
     },
 
@@ -147,10 +147,10 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/21c170f9f76d9751757d902691ef183aec0a276e/IMG_9758.MP4",
   "description": "-Texture : rendu propre et raffiné, une résine exceptionnelle fine et souple, agréable, qui montre un vrai travail de filtration✨.\n-Arômes : de fleurs plante fraîche et authentique, qui rappelle direct la plante Gelato de qualité.\n-Gout : c’est doux, Fruitée, sucrée, avec un goût naturel qui tape juste.\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité\n\nUn profil inspiré des meilleures lignées de la farm Hash Pirate Connexion.\n\n",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "5g", "price": 30 },
+    { "label": "10g", "price": 50 },
+    { "label": "25g", "price": 120 },
+    { "label": "50g", "price": 200 }
    ]
     },
     
@@ -163,10 +163,11 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/bdc9427b81f4cdaab1a881669133da4462f2c3ae/IMG_9747.MP4",
   "description": "-Texture : rendu propre et raffiné, une résine exceptionnelle Sec et Dur, agréable, qui montre un vrai travail de filtration 220u/90u✨.\n-Arômes : de fleurs plante fraîche et authentique,.\n-Gout : Fruitée, Pomme avec un goût de Banana qui tape juste.\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité Premium \n\nTous Droits d’une nouvelle Farm AK-47 .\n\n",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "2g", "price": 30 },
+    { "label": "5g", "price": 60 },
+    { "label": "10g", "price": 120 },
+    { "label": "25g", "price": 210 },
+    { "label": "50g", "price": 340 }
   ]
  },
     
@@ -182,7 +183,7 @@
     { "label": "3g", "price": 30 },
     { "label": "10g", "price": 70 },
     { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "50g", "price": 340 }
   ]
 },
     
@@ -195,10 +196,11 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b90dfd3e4c9085acba37889e5f60c44e21856f01/IMG_9714.MP4",
   "description": "🔥 CALI PLATE – RÉSINE D’ÉLITE 🔥\n\nclassé top 2 des résines les plus puissantes💥\n\nIssu d’un pollen californien 🇺🇸 soigneusement sélectionné 🌴🇺🇸, Cali Plate s’impose comme une résine premium taillée pour les vrais amateurs.\nFiltrée à 40 microns, elle offre un hash ultra clean, au visuel impeccable et aux saveurs puissantes ✨\n\nÀ l’extérieur, une plaque compacte et solide 💎 ; à l’intérieur, un cœur clair, crémeux et friable 🔍\nSon curing de 30 jours lui apporte une maturité idéale, une texture parfaite et une expression aromatique complète 👌\n\nEn bouche, c’est intense, lourd et surprenant, même pour les connaisseurs 🔥, rappelant le hash traditionnel.",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "1g", "price": 40 },
+    { "label": "2g", "price": 70 },
+    { "label": "5g", "price": 150 },
+    { "label": "10g", "price": 270 },
+    { "label": "25g", "price": 630 }
   ]
 },
     
@@ -211,10 +213,11 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/516bde191367555c2e1adb7ee07a7ac89b883d94/IMG_9769.MP4",
   "description": "🔥 🏔️Trichome Valley Farm d’exception pour les fin connaisseurs de vrai Hash ! qui nous sort ces magnifiques Frozen Prenium 2k26 !! Un mélange de saveurs et d’agressivité, ce magnifique Fresh Frozen 🥶 qu’est le Motor Breath va vous faire chavirer ! 🌬️\n\n- Texture : rendu propre et raffiné, une exceptionnelle fine et souple, agréable, une résine qui montre un vrai travail de filtration ✨.\n- Arômes : de fleurs plante fraîche et authentique weed .\n- Goût : c’est doux, fruitée 🍓, sucrée, avec un goût naturel qui tape juste comme on l’aime !\n\n⭐ Une résine premium, pure et soignée, faite pour ceux qui aiment la qualité, rappelant le hash traditionnel.",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "1g", "price": 20 },
+    { "label": "2,5g", "price": 40 },
+    { "label": "5g", "price": 70 },
+    { "label": "10g", "price": 100 },
+    { "label": "25g", "price": 240 }
   ]
 },
     
@@ -227,10 +230,12 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/1f11734f5bf18cd6b63b144011f64cec18fbb576/IMG_9746.MP4",
   "description": "Marlboro Française\nRien à voir avec les Rouge ou Smocking la team 👌 !\n\nMeilleure Qualité ⚠️\n- Tirage parfait\n- Tabac ne se vide pas",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "1c", "price": 70 },
+    { "label": "3c", "price": 195 },
+    { "label": "5c", "price": 300 },
+    { "label": "10c", "price": 550 },
+    { "label": "25c", "price": 1250 },
+    { "label": "50c", "price": 2000 }
   ]
 },
     
@@ -243,26 +248,27 @@
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/ce690636c930738ba5f1ee08a6b950829444a799/IMG_9709.MP4",
   "description": "Marlboro Oeil 👁️ et Bebe 👶\nRien à voir avec les Fr ou Gold 👌 !\n\nQualité plus basse que les Fr ⚠️",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "1c", "price": 50 },
+    { "label": "5c", "price": 250 },
+    { "label": "10c", "price": 450 },
+    { "label": "25c", "price": 875 },
+    { "label": "50c", "price": 1400 }
   ]
 },
     
   {
   "id": "tabac-luxembourg",
-  "name": "Winston Interval",
-  "brand": "Winston Interval",
+  "name": "Winston🇱🇺Interval",
+  "brand": "Winston🇱🇺Interval",
   "category": "Tabac",
   "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/29f522c5f49a07b1395c075e713563a45607e876/IMAGE%202026-01-27%2002%3A54%3A55.jpg",
   "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/29f522c5f49a07b1395c075e713563a45607e876/IMAGE%202026-01-27%2002%3A54%3A55.jpg",
   "description": "Seau Winston 250g\nPot Interval 250g\n\nQualité 100% Luxembourg 🇱🇺 ⚠️ les prix peuvent changer en fonction des hausses budgétaires luxembourgeoises ⚠️",
   "variants": [
-    { "label": "3g", "price": 30 },
-    { "label": "10g", "price": 70 },
-    { "label": "25g", "price": 140 },
-    { "label": "50g", "price": 220 }
+    { "label": "1seau", "price": 70 },
+    { "label": "3seau", "price": 210 },
+    { "label": "5seau", "price": 300 },
+    { "label": "10seau", "price": 550 }
   ]
  }
 ] 
