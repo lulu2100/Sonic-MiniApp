@@ -185,3 +185,19 @@
     { "label": "50g", "price": 220 }
   ]
 },
+    
+{
+  "id": "forum-cookie-cali-plate",
+  "name": "Forum-Cookie",
+  "brand": "Cali-Plate 🇺🇸",
+  "category": "Cali-Plate",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/710aa208f532faa2ba2b397c86e203ad4bd1f84f/IMAGE%202026-01-27%2001%3A21%3A18.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/b90dfd3e4c9085acba37889e5f60c44e21856f01/IMG_9714.MP4",
+  "description": "🔥 CALI PLATE – RÉSINE D’ÉLITE 🔥\n\nclassé top 2 des résines les plus puissantes💥\n\nIssu d’un pollen californien 🇺🇸 soigneusement sélectionné 🌴🇺🇸, Cali Plate s’impose comme une résine premium taillée pour les vrais amateurs.\nFiltrée à 40 microns, elle offre un hash ultra clean, au visuel impeccable et aux saveurs puissantes ✨\n\nÀ l’extérieur, une plaque compacte et solide 💎 ; à l’intérieur, un cœur clair, crémeux et friable 🔍\nSon curing de 30 jours lui apporte une maturité idéale, une texture parfaite et une expression aromatique complète 👌\n\nEn bouche, c’est intense, lourd et surprenant, même pour les connaisseurs 🔥, rappelant le hash traditionnel.",
+  "variants": [
+    { "label": "3g", "price": 30 },
+    { "label": "10g", "price": 70 },
+    { "label": "25g", "price": 140 },
+    { "label": "50g", "price": 220 }
+  ]
+},
