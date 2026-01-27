@@ -85,6 +85,24 @@
         { "label": "100g", "price": 280 }
       ]
     },
+    
+  {
+  "id": "Ultra Mousseux",
+  "name": "Italia",
+  "brand": "Italie 🇮🇹",
+  "category": "Mousseux",
+  "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/bc654b2a642ebeb077ee5a14a61873cdf38d662e/IMAGE%202026-01-27%2022%3A04%3A16.jpg",
+  "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/bc654b2a642ebeb077ee5a14a61873cdf38d662e/IMG_9791.MP4",
+  "description": "Un Mousseux Tout droit venue D’Italie🇮🇹 l’équipe !! Nouveaux Produits Tester et approuvé ! digne des vrais Mousse✨\n\nUne résine haut de gamme, aussi belle que bonne, pensée pour les vrais amateurs 💎\n\nCette résine jaune doré se distingue par sa texture mousseuse, légère et facile à travailler, ultra agréable en main 😍. 👌\n\nSon taux de THC élever sera efficace, parfait pour dormir profondément 😌\n\nProduit provenant D’italie 🇮🇹.",
+  "variants": [
+    { "label": "3g", "price": 20 },
+    { "label": "6,5g", "price": 40 },
+    { "label": "10g", "price": 60 },
+    { "label": "25g", "price": 90 },
+    { "label": "50g", "price": 150 },
+    { "label": "100g", "price": 270 }
+  ]
+},
 
     {
       "id": "mousseux-gelato-es",
@@ -98,7 +116,7 @@
         { "label": "3,5g", "price": 20 },
         { "label": "7g", "price": 40 },
         { "label": "10g", "price": 50 },
-        { "label": "25g", "price": 90 },
+        { "label": "25g", "price": 80 },
         { "label": "50g", "price": 140 },
         { "label": "100g", "price": 250 }
       ]
