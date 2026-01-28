@@ -2,10 +2,15 @@ body{
   margin:0;
   font-family:Arial;
   color:#fff;
-  background: 
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.85)),
-    url("https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/3e074d4afb4fba0813d4db29af1df57e8f3b85b0/IMAGE%202026-01-28%2000%3A47%3A45.jpg")
-    center/cover no-repeat fixed;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.65)),
+    url("https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/6ad350370de17f644aa3c213c91d8a775d5bc67f/IMAGE%202026-01-28%2001%3A11%3A10.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
     .top{
       padding:18px 14px 10px;
