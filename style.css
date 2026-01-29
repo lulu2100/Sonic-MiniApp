@@ -23,10 +23,20 @@ body{
   z-index: 20;
   overflow: hidden;
 }
-.top video{
-  width: 100%;
-  height: 100%;
-  object-fit: contain; 
+banner-video{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:1;
+}
+
+/* tout ce qui est dans .top passe au-dessus de la vidéo */
+.top > *{
+  position:relative;
+  z-index:2;
 }
     .logo{width:90px;height:90px;border-radius:50%;background:#1a2432;margin:0 auto 8px;overflow:hidden;border:1px solid #243244}
     .logo img{width:100%;height:100%;object-fit:cover;display:block}
