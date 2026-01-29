@@ -114,8 +114,8 @@ body{
   }
 
   .banner-video{
-    object-fit: contain;       /* IMPORTANT: plus de découpe */
-    object-position: center;   /* bien centré */
+    object-fit: cover;       /* IMPORTANT: plus de découpe */
+    object-position: center 70%;   /* bien centré */
     background: #000;
   }
 
