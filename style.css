@@ -101,3 +101,21 @@ body{
   position: relative;
   z-index: 1;
 }
+
+@media (max-width: 600px){
+  .top{
+    height: 340px;
+  }
+
+  body{
+    padding-top: 340px;
+  }
+
+  .logo{
+    top: 68%;
+  }
+
+  .shop-name{
+    top: calc(68% + 62px);
+  }
+}
