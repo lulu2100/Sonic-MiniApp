@@ -1,6 +1,7 @@
 {
   "shopName": "SonicCoffee",
-  "botUsername": "SonicShop_Official_Bot",
+  "shopLogo": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/907551737b83eed871d3728f82148619b58f1961/IMAGE%202026-01-28%2000%3A02%3A50.jpg",
+  "botUsername": "sonicShop_Official_Bot",
   "products": [
     {
       "id": "london-pound-cake",
