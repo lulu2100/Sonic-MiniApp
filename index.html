@@ -78,7 +78,7 @@
     DATA = await res.json();
 
     document.getElementById('shopName').textContent = DATA.shopName || "Mini-App";
-    document.getElementById("shopLogo").src = "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/907551737b83eed871d3728f82148619b58f1961/IMAGE%202026-01-28%2000%3A02%3A50.jpg";
+    document.getElementById('shopLogo').src = DATA.shopLogo || document.getElementById('shopLogo').src;
     
     const cats = uniq(DATA.products.map(p=>p.category));
     const brands = uniq(DATA.products.map(p=>p.brand));
