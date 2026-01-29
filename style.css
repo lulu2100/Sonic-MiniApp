@@ -30,7 +30,9 @@ body{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   z-index: 0;
+  background: #000;
 }
 
 .logo{
@@ -104,18 +106,24 @@ body{
 
 @media (max-width: 600px){
   .top{
-    height: 340px;
+    height: 420px;
   }
 
   body{
-    padding-top: 340px;
+    padding-top: 420px;
+  }
+
+  .banner-video{
+    object-fit: contain;       /* IMPORTANT: plus de découpe */
+    object-position: center;   /* bien centré */
+    background: #000;
   }
 
   .logo{
-    top: 68%;
+    top: 72%;
   }
 
   .shop-name{
-    top: calc(68% + 62px);
+    top: calc(72% + 62px);
   }
 }
