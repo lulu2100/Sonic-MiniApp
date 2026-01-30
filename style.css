@@ -137,10 +137,10 @@ body{
   }
   
 .logo{
-  top: 68%;
+  top: 70%;
 }
 
 .shop-name{
-  top: calc(68% + 62px);
+  top: calc(70% + 62px);
 }
 }
