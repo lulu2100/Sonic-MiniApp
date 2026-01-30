@@ -135,5 +135,12 @@ body{
 
     z-index: 0;
   }
+  
+.logo{
+  top: 68%;
+}
 
+.shop-name{
+  top: calc(68% + 62px);
+}
 }
