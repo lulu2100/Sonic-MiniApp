@@ -99,6 +99,11 @@
 
     render();
   })();
+  document.addEventListener('touchstart', () => {
+  const v = document.querySelector('.banner-video');
+  if (v) v.play();
+}, { once: true });
+  
 </script>
 </body>
 </html>
