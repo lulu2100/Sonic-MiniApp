@@ -38,6 +38,23 @@
     },
 
     {
+      "id": "Tropicana Banana",
+      "name": "Tropicana Banana",
+      "brand": "Espagne 🇪🇸",
+      "category": "WEED 🇪🇸",
+      "image": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/467a5fde82100a9f39640ce6d8cfbbedfcfb34f7/IMAGE%202026-01-30%2017%3A50%3A59.jpg",
+      "video": "https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/467a5fde82100a9f39640ce6d8cfbbedfcfb34f7/IMG_9997.MP4",
+      "description": "- Parent : Banana Kush x Tropicana\n- Génétique : Indica 50% /Sátiva 50%\n- Arômes : fruitées de banane et d'agrumes sur un fond floral, épicé et terreux\n- THC : 15% 20% \n- Effet : Tropicanna Banana est intense et durable, composé d'une montée haute euphorique et stimulante, avant d'évoluer vers un état détendu au niveau du corps, tout en nous gardant heureux et de bonne humeur .\n\nWeed espagnol🇪🇸\n\nSimple, efficace, Parfais pour les douleurs 🙌",
+      "variants": [
+        { "label": "2g", "price": 20 },
+        { "label": "6g", "price": 50 },
+        { "label": "10g", "price": 70 },
+        { "label": "25g", "price": 150 }
+        { "label": "50g", "price": 200 }
+      ]
+    },
+
+    {
       "id": "hash-lemon-haze",
       "name": "Lemon Haze",
       "brand": "Farm Hash Pirate Connexion",
