@@ -49,16 +49,23 @@
     </div>
   </div>
 
-  <script>
-    let DATA, product;
-    function qs(k){ return new URLSearchParams(location.search).get(k); }
-    function formatPrice(n){ return `${n}€`; }
-    function telegramOrderLink(payload){
-      const bot = (DATA.botUsername || "").replace("@","");
-      return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
-    }
+ <script>
+let DATA, product;
 
-  async function sendOrderToTelegram(order) {
+/* utils */
+function qs(k){
+  return new URLSearchParams(location.search).get(k);
+}
+function formatPrice(n){
+  return `${n}€`;
+}
+function telegramOrderLink(payload){
+  const bot = (DATA.botUsername || "").replace("@","");
+  return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
+}
+
+/* API Telegram */
+async function sendOrderToTelegram(order) {
   const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
 
   try {
@@ -69,59 +76,69 @@
     });
 
     const data = await r.json().catch(() => ({}));
-
-    if (!r.ok) {
-      console.error("API error:", data);
-      return { ok: false, data };
-    }
-
-    return { ok: true, data };
+    return { ok: r.ok, data };
   } catch (e) {
     console.error("Fetch failed:", e);
     return { ok: false, error: String(e) };
   }
 }
-      document.getElementById('vid').src = product.video || "";
-      document.getElementById('catPill').textContent = product.category || "";
-      document.getElementById('brandPill').textContent = product.brand || "";
-      document.getElementById('name').textContent = product.name || "";
-      document.getElementById('desc').textContent = product.description || "";
 
-      const variants = document.getElementById('variants');
-      variants.innerHTML = "";
+/* MAIN */
+(async () => {
+  const res = await fetch("products.json", { cache: "no-store" });
+  DATA = await res.json();
 
-      product.variants.forEach(v=>{
-        const b = document.createElement('button');
-        b.className = "btn";
-        b.textContent = `${v.label}  ${formatPrice(v.price)}`;
-        b.onclick = async () => {
-  const res = await sendOrderToTelegram({
-    product: product.name,
-    price: v.price,
-    qty: v.label,
-    delivery: "Meet-up",
-    city: "-",
-    address: "-",
-    payment: "-",
-    customer_name: "-",
-    customer_phone: "-",
-    note: "Clique sur prix",
-  });
+  const id = qs("id");
+  product = DATA.products.find(p => p.id === id);
 
-  if (res.ok) {
-    alert("Commande envoyée ✅");
-  } else {
-    alert("Erreur envoi ❌ (les prix restent affichés)");
+  if (!product) {
+    document.body.innerHTML = "<p>Produit introuvable</p>";
+    return;
   }
-};
-        variants.appendChild(b);
+
+  document.getElementById("vid").src = product.video || "";
+  document.getElementById("catPill").textContent = product.category || "";
+  document.getElementById("brandPill").textContent = product.brand || "";
+  document.getElementById("name").textContent = product.name || "";
+  document.getElementById("desc").textContent = product.description || "";
+
+  const variants = document.getElementById("variants");
+  variants.innerHTML = "";
+
+  product.variants.forEach(v => {
+    const b = document.createElement("button");
+    b.className = "btn";
+    b.textContent = `${v.label} ${formatPrice(v.price)}`;
+
+    b.onclick = async () => {
+      const res = await sendOrderToTelegram({
+        product: product.name,
+        price: v.price,
+        qty: v.label,
+        delivery: "Meet-up",
+        city: "-",
+        address: "-",
+        payment: "-",
+        customer_name: "-",
+        customer_phone: "-",
+        note: "Clique sur prix",
       });
 
-      document.getElementById('orderBtn').onclick = ()=>{
-        const payload = `order_${product.id}`;
-        window.open(telegramOrderLink(payload), "_blank");
-      };
-    })();
-  </script>
+      if (res.ok) {
+        alert("Commande envoyée ✅");
+      } else {
+        alert("Erreur envoi ❌");
+      }
+    };
+
+    variants.appendChild(b);
+  });
+
+  document.getElementById("orderBtn").onclick = () => {
+    const payload = `order_${product.id}`;
+    window.open(telegramOrderLink(payload), "_blank");
+  };
+})();
+</script>
 </body>
 </html>
