@@ -110,34 +110,63 @@ async function sendOrderToTelegram(order) {
     b.className = "btn";
     b.textContent = `${v.label} ${formatPrice(v.price)}`;
 
-    b.onclick = async () => {
-      const res = await sendOrderToTelegram({
-        product: product.name,
-        price: v.price,
-        qty: v.label,
-        delivery: "Meet-up",
-        city: "-",
-        address: "-",
-        payment: "-",
-        customer_name: "-",
-        customer_phone: "-",
-        note: "Clique sur prix",
-      });
+   let ORDER = {};
 
-      if (res.ok) {
-        alert("Commande envoyée ✅");
-      } else {
-        alert("Erreur envoi ❌");
-      }
+product.variants.forEach(v=>{
+  const b = document.createElement('button');
+  b.className = "btn";
+  b.textContent = ${v.label}  ${formatPrice(v.price)};
+
+  b.onclick = () => {
+    ORDER = {
+      product: product.name,
+      qty: v.label,
+      price: v.price
     };
 
-    variants.appendChild(b);
+    alert(`Produit sélectionné ✅
+${product.name}
+Quantité : ${v.label}
+Prix : ${v.price}€`);
+  };
+
+  variants.appendChild(b);
+});
+
+  document.getElementById('orderBtn').onclick = async () => {
+  if (!ORDER.product) {
+    alert("❌ Choisis un produit et un prix avant");
+    return;
+  }
+
+  const delivery = prompt("Livraison ou Meet-up ?");
+  const city = prompt("Ville / Région ?");
+  const address = delivery?.toLowerCase().includes("liv") 
+    ? prompt("Adresse de livraison") 
+    : "-";
+  const payment = prompt("Moyen de paiement ?");
+  const name = prompt("Ton prénom ?");
+  const phone = prompt("Ton téléphone ?");
+
+  const res = await sendOrderToTelegram({
+    product: ORDER.product,
+    price: ORDER.price,
+    qty: ORDER.qty,
+    delivery,
+    city,
+    address,
+    payment,
+    customer_name: name,
+    customer_phone: phone,
+    note: "Commande via mini-app"
   });
 
-  document.getElementById("orderBtn").onclick = () => {
-    const payload = `order_${product.id}`;
-    window.open(telegramOrderLink(payload), "_blank");
-  };
+  if (res.ok) {
+    alert("✅ Commande envoyée !");
+  } else {
+    alert("❌ Erreur d’envoi");
+  }
+};
 })();
 </script>
 </body>
