@@ -51,7 +51,7 @@
 
  <script>
 let DATA, product;
-
+let CART = [];
 /* utils */
 function qs(k){
   return new URLSearchParams(location.search).get(k);
@@ -117,52 +117,60 @@ product.variants.forEach(v=>{
   b.className = "btn";
   b.textContent = ${v.label}  ${formatPrice(v.price)};
 
-  b.onclick = () => {
-    ORDER = {
-      product: product.name,
-      qty: v.label,
-      price: v.price
-    };
+ b.onclick = () => {
+  CART.push({
+    product: product.name,
+    qty: v.label,
+    price: v.price,
+  });
 
-    alert(`Produit sélectionné ✅
-${product.name}
-Quantité : ${v.label}
-Prix : ${v.price}€`);
-  };
+  alert(
+    🛒 Ajouté au panier ✅\n\n${product.name}\nQuantité : ${v.label}\nPrix : ${v.price}€
+  );
+};
 
   variants.appendChild(b);
 });
 
-  document.getElementById('orderBtn').onclick = async () => {
-  if (!ORDER.product) {
-    alert("❌ Choisis un produit et un prix avant");
+  document.getElementById("orderBtn").onclick = async () => {
+  if (CART.length === 0) {
+    alert("❌ Ton panier est vide");
     return;
   }
 
-  const delivery = prompt("Livraison ou Meet-up ?");
-  const city = prompt("Ville / Région ?");
-  const address = delivery?.toLowerCase().includes("liv") 
-    ? prompt("Adresse de livraison") 
+  const delivery = prompt("🚚 Livraison ou Meet-up ?");
+  if (!delivery) return;
+
+  const city = prompt("🏙️ Ville / Région ?");
+  if (!city) return;
+
+  const address = delivery.toLowerCase().includes("liv")
+    ? prompt("📍 Adresse de livraison ?")
     : "-";
-  const payment = prompt("Moyen de paiement ?");
-  const name = prompt("Ton prénom ?");
-  const phone = prompt("Ton téléphone ?");
+
+  const payment = prompt("💳 Moyen de paiement ?");
+  if (!payment) return;
+
+  const name = prompt("👤 Ton prénom ?");
+  if (!name) return;
+
+  const phone = prompt("📞 Ton téléphone ?");
+  if (!phone) return;
 
   const res = await sendOrderToTelegram({
-    product: ORDER.product,
-    price: ORDER.price,
-    qty: ORDER.qty,
+    products: CART,
     delivery,
     city,
     address,
     payment,
     customer_name: name,
     customer_phone: phone,
-    note: "Commande via mini-app"
+    note: "Commande multi-produits via mini-app",
   });
 
   if (res.ok) {
     alert("✅ Commande envoyée !");
+    CART = []; // on vide le panier
   } else {
     alert("❌ Erreur d’envoi");
   }
