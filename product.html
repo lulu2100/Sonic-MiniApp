@@ -50,132 +50,135 @@
   </div>
 
  <script>
-let DATA, product;
-let CART = [];
-/* utils */
-function qs(k){
-  return new URLSearchParams(location.search).get(k);
-}
-function formatPrice(n){
-  return `${n}€`;
-}
-function telegramOrderLink(payload){
-  const bot = (DATA.botUsername || "").replace("@","");
-  return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
-}
+  let DATA, product;
+  let CART = [];
 
-/* API Telegram */
-async function sendOrderToTelegram(order) {
-  const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
+  /* utils */
+  function qs(k) {
+    return new URLSearchParams(location.search).get(k);
+  }
 
-  try {
-    const r = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(order),
+  function formatPrice(n) {
+    return `${n}€`;
+  }
+
+  // Lien Telegram "start" (si tu l'utilises encore ailleurs)
+  function telegramOrderLink(payload) {
+    const bot = (DATA.botUsername || "").replace("@", "");
+    return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
+  }
+
+  /* API Telegram */
+  async function sendOrderToTelegram(order) {
+    const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
+
+    try {
+      const r = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
+      });
+
+      const data = await r.json().catch(() => ({}));
+      return { ok: r.ok, data };
+    } catch (e) {
+      console.error("Fetch failed:", e);
+      return { ok: false, error: String(e) };
+    }
+  }
+
+  /* MAIN */
+  (async () => {
+    const res = await fetch("products.json", { cache: "no-store" });
+    DATA = await res.json();
+
+    const id = qs("id");
+    product = DATA.products.find((p) => String(p.id) === String(id));
+
+    if (!product) {
+      document.body.innerHTML = "<p>Produit introuvable</p>";
+      return;
+    }
+
+    // Remplissage page produit
+    document.getElementById("vid").src = product.video || "";
+    document.getElementById("catPill").textContent = product.category || "";
+    document.getElementById("brandPill").textContent = product.brand || "";
+    document.getElementById("name").textContent = product.name || "";
+    document.getElementById("desc").textContent = product.description || "";
+
+    // Boutons variantes
+    const variants = document.getElementById("variants");
+    variants.innerHTML = "";
+
+    product.variants.forEach((v) => {
+      const b = document.createElement("button");
+      b.className = "btn";
+      b.textContent = `${v.label}  ${formatPrice(v.price)}`;
+
+      b.onclick = () => {
+        CART.push({
+          product: product.name,
+          qty: v.label,
+          price: v.price,
+        });
+
+        alert(`🛒 Ajouté au panier ✅
+
+Produit : ${product.name}
+Quantité : ${v.label}
+Prix : ${v.price}€`);
+      };
+
+      variants.appendChild(b);
     });
 
-    const data = await r.json().catch(() => ({}));
-    return { ok: r.ok, data };
-  } catch (e) {
-    console.error("Fetch failed:", e);
-    return { ok: false, error: String(e) };
-  }
-}
+    // Commander via Telegram (envoie panier + infos)
+    document.getElementById("orderBtn").onclick = async () => {
+      if (CART.length === 0) {
+        alert("❌ Ton panier est vide");
+        return;
+      }
 
-/* MAIN */
-(async () => {
-  const res = await fetch("products.json", { cache: "no-store" });
-  DATA = await res.json();
+      const delivery = prompt("🚚 Livraison ou Meet-up ?");
+      if (!delivery) return;
 
-  const id = qs("id");
-  product = DATA.products.find(p => p.id === id);
+      const city = prompt("🏙️ Ville / Région ?");
+      if (!city) return;
 
-  if (!product) {
-    document.body.innerHTML = "<p>Produit introuvable</p>";
-    return;
-  }
+      const address = delivery.toLowerCase().includes("liv")
+        ? prompt("📍 Adresse de livraison ?")
+        : "-";
 
-  document.getElementById("vid").src = product.video || "";
-  document.getElementById("catPill").textContent = product.category || "";
-  document.getElementById("brandPill").textContent = product.brand || "";
-  document.getElementById("name").textContent = product.name || "";
-  document.getElementById("desc").textContent = product.description || "";
+      const payment = prompt("💳 Moyen de paiement ?");
+      if (!payment) return;
 
-  const variants = document.getElementById("variants");
-  variants.innerHTML = "";
+      const name = prompt("👤 Ton prénom ?");
+      if (!name) return;
 
-  product.variants.forEach(v => {
-    const b = document.createElement("button");
-    b.className = "btn";
-    b.textContent = `${v.label} ${formatPrice(v.price)}`;
+      const phone = prompt("📞 Ton téléphone ?");
+      if (!phone) return;
 
-   let ORDER = {};
+      const res = await sendOrderToTelegram({
+        products: CART,
+        delivery,
+        city,
+        address,
+        payment,
+        customer_name: name,
+        customer_phone: phone,
+        note: "Commande multi-produits via mini-app",
+      });
 
-product.variants.forEach(v=>{
-  const b = document.createElement('button');
-  b.className = "btn";
-  b.textContent = ${v.label}  ${formatPrice(v.price)};
-
- b.onclick = () => {
-  CART.push({
-    product: product.name,
-    qty: v.label,
-    price: v.price,
-  });
-
-  alert(
-    🛒 Ajouté au panier ✅\n\n${product.name}\nQuantité : ${v.label}\nPrix : ${v.price}€
-  );
-};
-
-  variants.appendChild(b);
-});
-
-  document.getElementById("orderBtn").onclick = async () => {
-  if (CART.length === 0) {
-    alert("❌ Ton panier est vide");
-    return;
-  }
-
-  const delivery = prompt("🚚 Livraison ou Meet-up ?");
-  if (!delivery) return;
-
-  const city = prompt("🏙️ Ville / Région ?");
-  if (!city) return;
-
-  const address = delivery.toLowerCase().includes("liv")
-    ? prompt("📍 Adresse de livraison ?")
-    : "-";
-
-  const payment = prompt("💳 Moyen de paiement ?");
-  if (!payment) return;
-
-  const name = prompt("👤 Ton prénom ?");
-  if (!name) return;
-
-  const phone = prompt("📞 Ton téléphone ?");
-  if (!phone) return;
-
-  const res = await sendOrderToTelegram({
-    products: CART,
-    delivery,
-    city,
-    address,
-    payment,
-    customer_name: name,
-    customer_phone: phone,
-    note: "Commande multi-produits via mini-app",
-  });
-
-  if (res.ok) {
-    alert("✅ Commande envoyée !");
-    CART = []; // on vide le panier
-  } else {
-    alert("❌ Erreur d’envoi");
-  }
-};
-})();
+      if (res.ok) {
+        alert("✅ Commande envoyée !");
+        CART = [];
+      } else {
+        console.error("API error:", res.data || res.error);
+        alert("❌ Erreur d'envoi");
+      }
+    };
+  })();
 </script>
 </body>
 </html>
