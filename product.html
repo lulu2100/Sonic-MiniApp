@@ -58,25 +58,29 @@
       return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
     }
 
-   async function sendOrderToTelegram(order) {
+  async function sendOrderToTelegram(order) {
   const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
 
-  const r = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(order),
-  });
+  try {
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    });
 
-  const data = await r.json().catch(() => ({}));
+    const data = await r.json().catch(() => ({}));
 
-  if (!r.ok) {
-    console.error("API error:", data);
-    throw new Error(data?.details || "Erreur API");
+    if (!r.ok) {
+      console.error("API error:", data);
+      return { ok: false, data };
+    }
+
+    return { ok: true, data };
+  } catch (e) {
+    console.error("Fetch failed:", e);
+    return { ok: false, error: String(e) };
   }
-
-  return data;
 }
-
       document.getElementById('vid').src = product.video || "";
       document.getElementById('catPill').textContent = product.category || "";
       document.getElementById('brandPill').textContent = product.brand || "";
@@ -91,7 +95,7 @@
         b.className = "btn";
         b.textContent = `${v.label}  ${formatPrice(v.price)}`;
         b.onclick = async () => {
-  await sendOrderToTelegram({
+  const res = await sendOrderToTelegram({
     product: product.name,
     price: v.price,
     qty: v.label,
@@ -104,7 +108,11 @@
     note: "Clique sur prix",
   });
 
-  alert("Commande envoyée ✅");
+  if (res.ok) {
+    alert("Commande envoyée ✅");
+  } else {
+    alert("Erreur envoi ❌ (les prix restent affichés)");
+  }
 };
         variants.appendChild(b);
       });
