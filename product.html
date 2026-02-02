@@ -51,94 +51,227 @@
 
  <script>
   let DATA, product;
-  let CART = [];
 
-  /* utils */
-  function qs(k) {
-    return new URLSearchParams(location.search).get(k);
+  // --- Panier (persistant) ---
+  const CART_KEY = "sonic_cart_v1";
+  function loadCart() {
+    try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
+    catch { return []; }
+  }
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+  function cartCount(cart) {
+    return cart.reduce((sum, it) => sum + (Number(it.count) || 1), 0);
   }
 
-  function formatPrice(n) {
-    return `${n}€`;
-  }
+  function qs(k){ return new URLSearchParams(location.search).get(k); }
+  function formatPrice(n){ return `${n}€`; }
 
-  // Lien Telegram "start" (si tu l'utilises encore ailleurs)
-  function telegramOrderLink(payload) {
-    const bot = (DATA.botUsername || "").replace("@", "");
-    return `https://t.me/${bot}?start=${encodeURIComponent(payload)}`;
-  }
+  function updateButtonsUI() {
+    const cart = loadCart();
+    const count = cartCount(cart);
 
-  /* API Telegram */
-  async function sendOrderToTelegram(order) {
-    const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
+    const orderBtn = document.getElementById("orderBtn");
+    if (orderBtn) orderBtn.textContent = count ? `Commander (${count})` : "Commander via Telegram";
 
-    try {
-      const r = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(order),
-      });
+    // Optionnel: bouton "Voir panier" s'il n'existe pas
+    let viewBtn = document.getElementById("viewCartBtn");
+    if (!viewBtn) {
+      viewBtn = document.createElement("button");
+      viewBtn.id = "viewCartBtn";
+      viewBtn.className = "btn";
+      viewBtn.style.marginTop = "10px";
+      viewBtn.textContent = count ? `Voir panier (${count})` : "Voir panier (0)";
 
-      const data = await r.json().catch(() => ({}));
-      return { ok: r.ok, data };
-    } catch (e) {
-      console.error("Fetch failed:", e);
-      return { ok: false, error: String(e) };
+      // on l'ajoute sous le bouton commander si possible
+      if (orderBtn && orderBtn.parentElement) {
+        orderBtn.parentElement.appendChild(viewBtn);
+      }
+    } else {
+      viewBtn.textContent = count ? `Voir panier (${count})` : "Voir panier (0)";
     }
+
+    viewBtn.onclick = () => showCartModal();
   }
 
-  /* MAIN */
+  // --- Modal panier simple ---
+  function showCartModal() {
+    const cart = loadCart();
+
+    let modal = document.getElementById("cartModal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "cartModal";
+      modal.style.position = "fixed";
+      modal.style.inset = "0";
+      modal.style.background = "rgba(0,0,0,0.6)";
+      modal.style.display = "flex";
+      modal.style.alignItems = "center";
+      modal.style.justifyContent = "center";
+      modal.style.zIndex = "9999";
+
+      modal.innerHTML = `
+        <div style="width:92%;max-width:520px;background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:16px;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="font-size:18px;font-weight:700;">Votre panier</div>
+            <button id="closeCartModal" class="btn" style="padding:8px 12px;">✕</button>
+          </div>
+
+          <div id="cartModalList" style="max-height:55vh;overflow:auto;margin-bottom:12px;"></div>
+
+          <div style="display:flex;gap:10px;">
+            <button id="clearCartBtn" class="btn" style="flex:1;">Vider</button>
+            <button id="closeCartBtn2" class="btn" style="flex:1;">Fermer</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      modal.querySelector("#closeCartModal").onclick = () => (modal.style.display = "none");
+      modal.querySelector("#closeCartBtn2").onclick = () => (modal.style.display = "none");
+      modal.querySelector("#clearCartBtn").onclick = () => {
+        saveCart([]);
+        renderCartModal();
+        updateButtonsUI();
+      };
+
+      // fermer si clic hors boîte
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+    }
+
+    renderCartModal();
+    modal.style.display = "flex";
+  }
+
+  function renderCartModal() {
+    const cart = loadCart();
+    const list = document.getElementById("cartModalList");
+    if (!list) return;
+
+    if (!cart.length) {
+      list.innerHTML = `<div style="opacity:0.8;">Panier vide.</div>`;
+      return;
+    }
+
+    const rows = cart.map((it, idx) => {
+      const lineTotal = (Number(it.price)||0) * (Number(it.count)||1);
+      return `
+        <div style="border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:12px;margin-bottom:10px;">
+          <div style="font-weight:700;">${escapeHtml(it.product || "-")}</div>
+          <div style="opacity:0.9;margin-top:4px;">Quantité: ${escapeHtml(it.qty || "-")} • Prix: ${escapeHtml(String(it.price ?? "-"))}€</div>
+          <div style="opacity:0.9;margin-top:4px;">Nb:
+            <button class="btn" data-act="dec" data-idx="${idx}" style="padding:6px 10px;">-</button>
+            <span style="display:inline-block;min-width:28px;text-align:center;">${it.count || 1}</span>
+            <button class="btn" data-act="inc" data-idx="${idx}" style="padding:6px 10px;">+</button>
+            <button class="btn" data-act="del" data-idx="${idx}" style="padding:6px 10px;float:right;">🗑</button>
+          </div>
+          <div style="margin-top:6px;font-weight:700;">Total ligne: ${lineTotal.toFixed(2)}€</div>
+        </div>
+      `;
+    }).join("");
+
+    const total = cart.reduce((sum, it) => sum + (Number(it.price)||0) * (Number(it.count)||1), 0);
+
+    list.innerHTML = rows + `<div style="font-size:18px;font-weight:800;margin-top:8px;">Total: ${total.toFixed(2)}€</div>`;
+
+    // handlers +/- delete
+    list.querySelectorAll("button[data-act]").forEach(btn => {
+      btn.onclick = () => {
+        const act = btn.getAttribute("data-act");
+        const idx = Number(btn.getAttribute("data-idx"));
+        const cart2 = loadCart();
+        const item = cart2[idx];
+        if (!item) return;
+
+        if (act === "inc") item.count = (Number(item.count)||1) + 1;
+        if (act === "dec") item.count = Math.max(1, (Number(item.count)||1) - 1);
+        if (act === "del") cart2.splice(idx, 1);
+
+        saveCart(cart2);
+        renderCartModal();
+        updateButtonsUI();
+      };
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // --- MAIN ---
   (async () => {
     const res = await fetch("products.json", { cache: "no-store" });
     DATA = await res.json();
 
     const id = qs("id");
-    product = DATA.products.find((p) => String(p.id) === String(id));
+    product = DATA.products.find(p => String(p.id) === String(id));
 
     if (!product) {
-      document.body.innerHTML = "<p>Produit introuvable</p>";
+      document.body.innerHTML = `<div style="padding:20px">Produit introuvable. <a href="index.html">Retour</a></div>`;
       return;
     }
 
-    // Remplissage page produit
+    // Remplir la page produit
     document.getElementById("vid").src = product.video || "";
     document.getElementById("catPill").textContent = product.category || "";
     document.getElementById("brandPill").textContent = product.brand || "";
     document.getElementById("name").textContent = product.name || "";
     document.getElementById("desc").textContent = product.description || "";
 
-    // Boutons variantes
-    const variants = document.getElementById("variants");
-    variants.innerHTML = "";
+    // Boutons prix -> ajout panier
+    const variantsEl = document.getElementById("variants");
+    variantsEl.innerHTML = "";
 
-    product.variants.forEach((v) => {
+    product.variants.forEach(v => {
       const b = document.createElement("button");
       b.className = "btn";
-      b.textContent = `${v.label}  ${formatPrice(v.price)}`;
+      b.textContent = `${v.label} ${formatPrice(v.price)}`;
 
       b.onclick = () => {
-        CART.push({
+        const cart = loadCart();
+        cart.push({
           product: product.name,
           qty: v.label,
           price: v.price,
+          count: 1
         });
+        saveCart(cart);
 
-        alert(`🛒 Ajouté au panier ✅
+        updateButtonsUI();
 
-Produit : ${product.name}
-Quantité : ${v.label}
-Prix : ${v.price}€`);
+        alert(
+          `🛒 Ajouté au panier ✅\n\n` +
+          `Produit : ${product.name}\n` +
+          `Quantité : ${v.label}\n` +
+          `Prix : ${v.price}€`
+        );
       };
 
-      variants.appendChild(b);
+      variantsEl.appendChild(b);
     });
 
-    // Commander via Telegram (envoie panier + infos)
+    updateButtonsUI();
+
+    // Checkout (sans envoi)
     document.getElementById("orderBtn").onclick = async () => {
-      if (CART.length === 0) {
+      const cart = loadCart();
+      if (!cart.length) {
         alert("❌ Ton panier est vide");
         return;
       }
+
+      // petit récap avant
+      const recap = cart.map((it, i) => `${i+1}. ${it.product} — ${it.qty} — ${it.price}€ x${it.count || 1}`).join("\n");
+      const ok = confirm("✅ Récap panier :\n\n" + recap + "\n\nContinuer ?");
+      if (!ok) return;
 
       const delivery = prompt("🚚 Livraison ou Meet-up ?");
       if (!delivery) return;
@@ -146,7 +279,7 @@ Prix : ${v.price}€`);
       const city = prompt("🏙️ Ville / Région ?");
       if (!city) return;
 
-      const address = delivery.toLowerCase().includes("liv")
+      const address = (delivery.toLowerCase().includes("liv"))
         ? prompt("📍 Adresse de livraison ?")
         : "-";
 
@@ -159,24 +292,24 @@ Prix : ${v.price}€`);
       const phone = prompt("📞 Ton téléphone ?");
       if (!phone) return;
 
-      const res = await sendOrderToTelegram({
-        products: CART,
+      const order = {
+        products: cart,
         delivery,
         city,
-        address,
+        address: address || "-",
         payment,
         customer_name: name,
         customer_phone: phone,
-        note: "Commande multi-produits via mini-app",
-      });
+        note: "Commande multi-produits via mini-app"
+      };
 
-      if (res.ok) {
-        alert("✅ Commande envoyée !");
-        CART = [];
-      } else {
-        console.error("API error:", res.data || res.error);
-        alert("❌ Erreur d'envoi");
-      }
+      // ICI: pas d’envoi (conforme)
+      console.log("ORDER_READY", order);
+      alert("✅ Commande prête (voir console).");
+
+      // Optionnel: vider panier après confirmation
+      saveCart([]);
+      updateButtonsUI();
     };
   })();
 </script>
