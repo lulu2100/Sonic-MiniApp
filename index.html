@@ -306,7 +306,7 @@
   const addressInput = () => document.getElementById("addressInput");
   const paymentInput = () => document.getElementById("paymentInput");
   const nameInput    = () => document.getElementById("nameInput");
-  const phoneInput   = () => document.getElementById("phoneInput");
+  const telegramInput = () => document.getElementById("telegramInput");
   const noteInput    = () => document.getElementById("noteInput");
   const confirmBtn   = () => document.getElementById("confirmBtn");
 
@@ -510,14 +510,15 @@
         const address = (addressInput()?.value || "").trim();
         const payment = (paymentInput()?.value || "").trim();
         const customer_name = (nameInput()?.value || "").trim();
-        const customer_phone = (phoneInput()?.value || "").trim();
+       const customer_telegram = (telegramInput()?.value || "").trim();
         const note = (noteInput()?.value || "").trim();
 
         if (!city) { alert("❌ Ville / Région obligatoire"); return; }
         if (delivery === "Livraison" && !address) { alert("❌ Adresse obligatoire pour livraison"); return; }
         if (!payment) { alert("❌ Moyen de paiement obligatoire"); return; }
         if (!customer_name) { alert("❌ Nom obligatoire"); return; }
-        if (!customer_phone) { alert("❌ Téléphone obligatoire"); return; }
+        if (!customer_telegram) { alert("❌ @Telegram obligatoire"); return; }
+        if (customer_telegram[0] !== "@") { alert("❌ Mets un @ au début (ex: @pseudo)"); return; }
 
         const payload = {
           products: cart.map(it => ({
@@ -531,7 +532,7 @@
           address: delivery === "Livraison" ? address : "-",
           payment,
           customer_name,
-          customer_phone,
+          customer_telegram,
           note: note || "Commande via mini-app",
         };
 
