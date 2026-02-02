@@ -168,6 +168,151 @@
       font-size: 18px;
       cursor: pointer;
     }
+
+    /* =========================
+       ✅ AJOUT MENU (bouton + panneau + pages)
+       ========================= */
+
+    /* Bouton menu (en haut à droite, comme sur tes photos) */
+    .menuBtn{
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.25);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      z-index: 60;
+    }
+    .menuBtn svg{opacity:.9}
+
+    /* Drawer menu */
+    .menuModal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 12000;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .menuModal.hidden{ display:none !important; }
+
+    .menuDrawer{
+      width: min(320px, 86vw);
+      height: 100%;
+      background: rgba(15,18,26,.92);
+      border-left: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 18px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+    .menuClose{
+      align-self: flex-end;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-size: 22px;
+      cursor:pointer;
+    }
+    .menuItem{
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,.72);
+      padding: 10px 6px;
+      cursor: pointer;
+    }
+    .menuItem.active{
+      color: #59b5ff;
+    }
+
+    /* Pages (Promo/Infos/Contact) */
+    .page{
+      padding: 18px 14px 90px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pageTitle{
+      font-size: 34px;
+      font-weight: 900;
+      margin: 18px 0 18px;
+      color: #e9eef7;
+    }
+    .centerIcon{
+      width: 78px;
+      height: 78px;
+      border-radius: 999px;
+      background: rgba(89,181,255,.15);
+      border: 1px solid rgba(89,181,255,.25);
+      display:grid;
+      place-items:center;
+      margin: 18px auto 10px;
+    }
+    .btnBig{
+      width: 100%;
+      padding: 16px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.07);
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .btnBig + .btnBig{ margin-top: 14px; }
+
+    .promoList{ display:flex; flex-direction:column; gap: 14px; }
+    .promoCard{
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .promoLeft{ display:flex; flex-direction:column; gap: 8px; }
+    .promoBadges{ display:flex; gap: 10px; }
+    .pillBadge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .pillRed{ background: rgba(255,59,48,.18); border-color: rgba(255,59,48,.25); }
+    .promoTitle{ font-weight: 900; font-size: 18px; }
+    .promoPrice{
+      font-weight: 900;
+      font-size: 22px;
+      color: #59b5ff;
+      white-space: nowrap;
+    }
+    .promoOld{
+      text-decoration: line-through;
+      opacity: .55;
+      margin-right: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      color: #cfd7e6;
+    }
   </style>
 </head>
 
@@ -185,21 +330,74 @@
     </div>
 
     <div id="shopName" class="shop-name">SonicCoffee</div>
+
+    <!-- ✅ AJOUT : bouton menu (☰) -->
+    <button id="menuBtn" class="menuBtn" type="button" title="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
 
-  <div class="filters">
-    <select id="catSelect"><option value="">Toutes les catégories</option></select>
-    <select id="brandSelect"><option value="">Toutes les farms</option></select>
+  <!-- ✅ PAGE ACCUEIL (ton contenu inchangé, juste mis dans un conteneur) -->
+  <div id="pageHome">
+    <div class="filters">
+      <select id="catSelect"><option value="">Toutes les catégories</option></select>
+      <select id="brandSelect"><option value="">Toutes les farms</option></select>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="spacer"></div>
+
+    <div class="bottom-bar">
+      <div class="tab"><b>Menu</b></div>
+      <div class="tab"><b>Infos</b></div>
+      <div class="tab"><b>Canal</b></div>
+      <div class="tab"><b>Contact</b></div>
+    </div>
   </div>
 
-  <div class="grid" id="grid"></div>
-  <div class="spacer"></div>
+  <!-- ✅ PAGE Pack / Promo -->
+  <div id="pagePromo" class="page hidden">
+    <div class="centerIcon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 1 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 1 0 0-4V8Z" stroke="#59b5ff" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9 9h.01M9 12h.01M9 15h.01" stroke="#59b5ff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="pageTitle">Promotions du moment</div>
+    <div id="promoList" class="promoList"></div>
+  </div>
 
-  <div class="bottom-bar">
-    <div class="tab"><b>Menu</b></div>
-    <div class="tab"><b>Infos</b></div>
-    <div class="tab"><b>Canal</b></div>
-    <div class="tab"><b>Contact</b></div>
+  <!-- ✅ PAGE Informations -->
+  <div id="pageInfos" class="page hidden">
+    <div class="centerIcon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 17v-6" stroke="#59b5ff" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 8h.01" stroke="#59b5ff" stroke-width="3" stroke-linecap="round"/>
+        <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="#59b5ff" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="pageTitle">Informations</div>
+
+    <button id="infoTelegramBtn" class="btnBig" type="button">📣 Canal Telegram</button>
+    <button id="infoSnapBtn" class="btnBig" type="button">👻 Snapchat</button>
+  </div>
+
+  <!-- ✅ PAGE Contact -->
+  <div id="pageContact" class="page hidden">
+    <div class="centerIcon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 12a8 8 0 0 1 16 0v6a2 2 0 0 1-2 2h-2" stroke="#59b5ff" stroke-width="2" stroke-linecap="round"/>
+        <path d="M4 14h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5Z" stroke="#59b5ff" stroke-width="2"/>
+        <path d="M20 14h-3a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z" stroke="#59b5ff" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="pageTitle">Support</div>
+    <div style="opacity:.8; line-height:1.4; margin-bottom:16px;">
+      Si vous rencontrez un problème ou une question, vous pouvez contacter notre support sur Telegram.
+    </div>
+    <button id="contactBtn" class="btnBig" type="button">✈️ Contacter @SonicShop_Officiel</button>
   </div>
 
   <!-- ✅ Bouton panier (comme ta photo) -->
@@ -248,10 +446,33 @@
     </div>
   </div>
 
+  <!-- ✅ MENU DRAWER (comme tes photos) -->
+  <div id="menuModal" class="menuModal hidden">
+    <div class="menuDrawer" role="dialog" aria-modal="true">
+      <button id="menuClose" class="menuClose" type="button">✕</button>
+
+      <div id="menuHome" class="menuItem active">Accueil</div>
+      <div id="menuPromo" class="menuItem">Pack / Promo</div>
+      <div id="menuInfos" class="menuItem">Informations</div>
+      <div id="menuContact" class="menuItem">Contact</div>
+    </div>
+  </div>
+
 <script>
   // ====== CONFIG (IMPORTANT: doit matcher product.html) ======
   const CART_KEY = "sonic_cart_v1";
   const API_URL  = "https://sonic-telegram-bot.vercel.app/api/telegram";
+
+  // ✅ TES LIENS (comme tu as donné)
+  const CHANNEL_TELEGRAM_URL = "https://t.me/sonic_officiel_coffee";
+  const SNAP_URL = "https://snapchat.com/t/6vukTjdx";
+  const CONTACT_USERNAME = "SonicShop_Officiel"; // sans @
+
+  // ✅ Promos (tu modifies ici quand tu veux)
+  const PROMOS = [
+    // Exemple :
+    // { badgeLeft:"17% OFF", badgeLeftRed:true, badgeRight:"Packs", title:"PACK DÉCOUVERTE", oldPrice:60, price:50 },
+  ];
 
   let DATA;
 
@@ -455,6 +676,107 @@
     });
   }
 
+  // =========================
+  // ✅ MENU + PAGES
+  // =========================
+  const pages = {
+    home: document.getElementById("pageHome"),
+    promo: document.getElementById("pagePromo"),
+    infos: document.getElementById("pageInfos"),
+    contact: document.getElementById("pageContact"),
+  };
+
+  const menuModal = document.getElementById("menuModal");
+  const menuBtn = document.getElementById("menuBtn");
+  const menuClose = document.getElementById("menuClose");
+
+  const menuItems = {
+    home: document.getElementById("menuHome"),
+    promo: document.getElementById("menuPromo"),
+    infos: document.getElementById("menuInfos"),
+    contact: document.getElementById("menuContact"),
+  };
+
+  function openMenu(){ menuModal.classList.remove("hidden"); }
+  function closeMenuDrawer(){ menuModal.classList.add("hidden"); }
+
+  function setActiveMenu(key){
+    Object.keys(menuItems).forEach(k=>{
+      menuItems[k].classList.toggle("active", k === key);
+    });
+  }
+
+  function showPage(key){
+    Object.keys(pages).forEach(k=>{
+      pages[k].classList.toggle("hidden", k !== key);
+    });
+    setActiveMenu(key);
+    closeMenuDrawer();
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  function renderPromos(){
+    const wrap = document.getElementById("promoList");
+    wrap.innerHTML = "";
+
+    if (!PROMOS.length) {
+      const p = document.createElement("div");
+      p.style.opacity = ".85";
+      p.style.padding = "8px 2px";
+      p.textContent = "Aucune promotion pour le moment.";
+      wrap.appendChild(p);
+      return;
+    }
+
+    PROMOS.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "promoCard";
+
+      const left = document.createElement("div");
+      left.className = "promoLeft";
+
+      const badges = document.createElement("div");
+      badges.className = "promoBadges";
+
+      const b1 = document.createElement("div");
+      b1.className = "pillBadge" + (p.badgeLeftRed ? " pillRed" : "");
+      b1.textContent = p.badgeLeft || "";
+
+      const b2 = document.createElement("div");
+      b2.className = "pillBadge";
+      b2.textContent = p.badgeRight || "";
+
+      badges.appendChild(b1);
+      badges.appendChild(b2);
+
+      const title = document.createElement("div");
+      title.className = "promoTitle";
+      title.textContent = p.title || "";
+
+      left.appendChild(badges);
+      left.appendChild(title);
+
+      const right = document.createElement("div");
+      right.className = "promoPrice";
+      right.innerHTML = `${p.oldPrice ? `<span class="promoOld">${p.oldPrice}€</span>` : ""}${p.price} €`;
+
+      card.appendChild(left);
+      card.appendChild(right);
+      wrap.appendChild(card);
+    });
+  }
+
+  // Infos buttons
+  function setupInfoButtons(){
+    const t = document.getElementById("infoTelegramBtn");
+    const s = document.getElementById("infoSnapBtn");
+    if (t) t.onclick = ()=> window.open(CHANNEL_TELEGRAM_URL, "_blank");
+    if (s) s.onclick = ()=> window.open(SNAP_URL, "_blank");
+
+    const c = document.getElementById("contactBtn");
+    if (c) c.onclick = ()=> window.open(`https://t.me/${CONTACT_USERNAME}`, "_blank");
+  }
+
   (async ()=>{
     // bind panier
     if (cartFab()) cartFab().onclick = openCart;
@@ -468,6 +790,19 @@
     document.addEventListener("change", (e) => {
       if (e.target && e.target.name === "deliveryType") renderCart();
     });
+
+    // ✅ bind menu
+    if (menuBtn) menuBtn.onclick = openMenu;
+    if (menuClose) menuClose.onclick = closeMenuDrawer;
+    if (menuModal) {
+      menuModal.addEventListener("click", (e)=>{
+        if (e.target === menuModal) closeMenuDrawer();
+      });
+    }
+    menuItems.home.onclick = ()=> showPage("home");
+    menuItems.promo.onclick = ()=> showPage("promo");
+    menuItems.infos.onclick = ()=> showPage("infos");
+    menuItems.contact.onclick = ()=> showPage("contact");
 
     // load products
     const res = await fetch('products.json', {cache:'no-store'});
@@ -499,6 +834,10 @@
     // init panier
     renderCart();
 
+    // init pages
+    renderPromos();
+    setupInfoButtons();
+
     // confirm commande (photo 3-4)
     if (confirmBtn()) {
       confirmBtn().onclick = async () => {
@@ -510,7 +849,7 @@
         const address = (addressInput()?.value || "").trim();
         const payment = (paymentInput()?.value || "").trim();
         const customer_name = (nameInput()?.value || "").trim();
-       const customer_telegram = (telegramInput()?.value || "").trim();
+        const customer_telegram = (telegramInput()?.value || "").trim();
         const note = (noteInput()?.value || "").trim();
 
         if (!city) { alert("❌ Ville / Région obligatoire"); return; }
