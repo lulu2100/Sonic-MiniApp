@@ -48,269 +48,282 @@
       </div>
     </div>
   </div>
+<!-- Bouton panier flottant + badge -->
+<button id="cartBtn" style="
+  position:fixed; right:16px; top:110px; z-index:9999;
+  padding:10px 12px; border-radius:999px; border:1px solid #2a2a2a;
+  background:#111; color:#fff; font-weight:700;">
+  🛒 Panier <span id="cartCount" style="
+    display:inline-block; min-width:22px; padding:2px 8px;
+    margin-left:6px; border-radius:999px; background:#2b7cff; color:#fff;">0</span>
+</button>
 
+<!-- Modal panier -->
+<div id="cartModal" style="
+  position:fixed; inset:0; z-index:9998; display:none;
+  background:rgba(0,0,0,0.55);">
+  <div style="
+    max-width:520px; margin:80px auto; background:#0f0f0f; color:#fff;
+    border:1px solid #2a2a2a; border-radius:16px; padding:16px;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <h3 style="margin:0;">Votre panier</h3>
+      <button id="cartClose" style="
+        background:transparent; color:#fff; border:0; font-size:22px; cursor:pointer;">✕</button>
+    </div>
+
+    <div id="cartItems" style="margin-top:12px;"></div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:14px; font-weight:800;">
+      <div>Total</div>
+      <div id="cartTotal">0€</div>
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button id="cartClear" style="
+        flex:1; padding:12px; border-radius:12px; border:1px solid #2a2a2a;
+        background:#1a1a1a; color:#fff; font-weight:700; cursor:pointer;">
+        Vider
+      </button>
+      <button id="cartCheckout" style="
+        flex:2; padding:12px; border-radius:12px; border:0;
+        background:#2b7cff; color:#fff; font-weight:800; cursor:pointer;">
+        Commander
+      </button>
+    </div>
+  </div>
+</div>
  <script>
   let DATA, product;
 
-  // --- Panier (persistant) ---
+  // ---- Panier persistant (localStorage) ----
   const CART_KEY = "sonic_cart_v1";
-  function loadCart() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
-    catch { return []; }
-  }
-  function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }
-  function cartCount(cart) {
-    return cart.reduce((sum, it) => sum + (Number(it.count) || 1), 0);
-  }
+  let CART = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
 
   function qs(k){ return new URLSearchParams(location.search).get(k); }
-  function formatPrice(n){ return `${n}€`; }
+  function formatPrice(n){ return `${Number(n||0)}€`; }
 
-  function updateButtonsUI() {
-    const cart = loadCart();
-    const count = cartCount(cart);
+  async function sendOrderToTelegram(order) {
+    const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
 
-    const orderBtn = document.getElementById("orderBtn");
-    if (orderBtn) orderBtn.textContent = count ? `Commander (${count})` : "Commander via Telegram";
-
-    // Optionnel: bouton "Voir panier" s'il n'existe pas
-    let viewBtn = document.getElementById("viewCartBtn");
-    if (!viewBtn) {
-      viewBtn = document.createElement("button");
-      viewBtn.id = "viewCartBtn";
-      viewBtn.className = "btn";
-      viewBtn.style.marginTop = "10px";
-      viewBtn.textContent = count ? `Voir panier (${count})` : "Voir panier (0)";
-
-      // on l'ajoute sous le bouton commander si possible
-      if (orderBtn && orderBtn.parentElement) {
-        orderBtn.parentElement.appendChild(viewBtn);
-      }
-    } else {
-      viewBtn.textContent = count ? `Voir panier (${count})` : "Voir panier (0)";
-    }
-
-    viewBtn.onclick = () => showCartModal();
-  }
-
-  // --- Modal panier simple ---
-  function showCartModal() {
-    const cart = loadCart();
-
-    let modal = document.getElementById("cartModal");
-    if (!modal) {
-      modal = document.createElement("div");
-      modal.id = "cartModal";
-      modal.style.position = "fixed";
-      modal.style.inset = "0";
-      modal.style.background = "rgba(0,0,0,0.6)";
-      modal.style.display = "flex";
-      modal.style.alignItems = "center";
-      modal.style.justifyContent = "center";
-      modal.style.zIndex = "9999";
-
-      modal.innerHTML = `
-        <div style="width:92%;max-width:520px;background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:16px;color:#fff;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <div style="font-size:18px;font-weight:700;">Votre panier</div>
-            <button id="closeCartModal" class="btn" style="padding:8px 12px;">✕</button>
-          </div>
-
-          <div id="cartModalList" style="max-height:55vh;overflow:auto;margin-bottom:12px;"></div>
-
-          <div style="display:flex;gap:10px;">
-            <button id="clearCartBtn" class="btn" style="flex:1;">Vider</button>
-            <button id="closeCartBtn2" class="btn" style="flex:1;">Fermer</button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-
-      modal.querySelector("#closeCartModal").onclick = () => (modal.style.display = "none");
-      modal.querySelector("#closeCartBtn2").onclick = () => (modal.style.display = "none");
-      modal.querySelector("#clearCartBtn").onclick = () => {
-        saveCart([]);
-        renderCartModal();
-        updateButtonsUI();
-      };
-
-      // fermer si clic hors boîte
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
+    try {
+      const r = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
       });
-    }
 
-    renderCartModal();
-    modal.style.display = "flex";
+      const data = await r.json().catch(() => ({}));
+      return { ok: r.ok, data };
+    } catch (e) {
+      console.error("Fetch failed:", e);
+      return { ok: false, error: String(e) };
+    }
   }
 
-  function renderCartModal() {
-    const cart = loadCart();
-    const list = document.getElementById("cartModalList");
-    if (!list) return;
+  function saveCart(){
+    localStorage.setItem(CART_KEY, JSON.stringify(CART));
+    renderCart();
+  }
 
-    if (!cart.length) {
-      list.innerHTML = `<div style="opacity:0.8;">Panier vide.</div>`;
+  function cartCount(){
+    return CART.reduce((sum, it) => sum + (it.count || 1), 0);
+  }
+
+  function cartTotal(){
+    return CART.reduce((sum, it) => sum + (Number(it.price||0) * Number(it.count||1)), 0);
+  }
+
+  function addToCart(item){
+    // item: { productId, product, variant, qtyLabel, price, count }
+    const key = `${item.productId}__${item.qtyLabel}__${item.price}`;
+    const existing = CART.find(x => x.key === key);
+    if (existing) existing.count += 1;
+    else CART.push({ ...item, key, count: 1 });
+
+    alert(`🛒 Ajouté au panier ✅\n\nProduit : ${item.product}\nQuantité : ${item.qtyLabel}\nPrix : ${item.price}€`);
+    saveCart();
+  }
+
+  function changeCount(key, delta){
+    const it = CART.find(x => x.key === key);
+    if (!it) return;
+    it.count += delta;
+    if (it.count <= 0) CART = CART.filter(x => x.key !== key);
+    saveCart();
+  }
+
+  function removeItem(key){
+    CART = CART.filter(x => x.key !== key);
+    saveCart();
+  }
+
+  // ---- UI panier ----
+  const cartBtn = () => document.getElementById("cartBtn");
+  const cartCountEl = () => document.getElementById("cartCount");
+  const cartModal = () => document.getElementById("cartModal");
+  const cartItemsEl = () => document.getElementById("cartItems");
+  const cartTotalEl = () => document.getElementById("cartTotal");
+
+  function openCart(){ cartModal().style.display = "block"; }
+  function closeCart(){ cartModal().style.display = "none"; }
+
+  function renderCart(){
+    if (cartCountEl()) cartCountEl().textContent = String(cartCount());
+    if (cartTotalEl()) cartTotalEl().textContent = formatPrice(cartTotal());
+
+    if (!cartItemsEl()) return;
+
+    if (CART.length === 0){
+      cartItemsEl().innerHTML = `<div style="opacity:.8; padding:10px;">Panier vide.</div>`;
       return;
     }
 
-    const rows = cart.map((it, idx) => {
-      const lineTotal = (Number(it.price)||0) * (Number(it.count)||1);
-      return `
-        <div style="border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:12px;margin-bottom:10px;">
-          <div style="font-weight:700;">${escapeHtml(it.product || "-")}</div>
-          <div style="opacity:0.9;margin-top:4px;">Quantité: ${escapeHtml(it.qty || "-")} • Prix: ${escapeHtml(String(it.price ?? "-"))}€</div>
-          <div style="opacity:0.9;margin-top:4px;">Nb:
-            <button class="btn" data-act="dec" data-idx="${idx}" style="padding:6px 10px;">-</button>
-            <span style="display:inline-block;min-width:28px;text-align:center;">${it.count || 1}</span>
-            <button class="btn" data-act="inc" data-idx="${idx}" style="padding:6px 10px;">+</button>
-            <button class="btn" data-act="del" data-idx="${idx}" style="padding:6px 10px;float:right;">🗑</button>
-          </div>
-          <div style="margin-top:6px;font-weight:700;">Total ligne: ${lineTotal.toFixed(2)}€</div>
+    cartItemsEl().innerHTML = CART.map(it => `
+      <div style="
+        display:flex; align-items:center; justify-content:space-between;
+        padding:10px; border:1px solid #2a2a2a; border-radius:12px; margin-bottom:10px;">
+        <div style="max-width:70%;">
+          <div style="font-weight:800;">${it.product}</div>
+          <div style="opacity:.8; font-size:13px;">${it.qtyLabel} — ${it.price}€ / unité</div>
         </div>
-      `;
-    }).join("");
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button data-minus="${it.key}" style="width:34px; height:34px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:#fff;">-</button>
+          <div style="min-width:20px; text-align:center; font-weight:800;">${it.count}</div>
+          <button data-plus="${it.key}" style="width:34px; height:34px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:#fff;">+</button>
+          <button data-del="${it.key}" title="Supprimer" style="width:34px; height:34px; border-radius:10px; border:1px solid #2a2a2a; background:#1a1a1a; color:#fff;">🗑️</button>
+        </div>
+      </div>
+    `).join("");
 
-    const total = cart.reduce((sum, it) => sum + (Number(it.price)||0) * (Number(it.count)||1), 0);
-
-    list.innerHTML = rows + `<div style="font-size:18px;font-weight:800;margin-top:8px;">Total: ${total.toFixed(2)}€</div>`;
-
-    // handlers +/- delete
-    list.querySelectorAll("button[data-act]").forEach(btn => {
-      btn.onclick = () => {
-        const act = btn.getAttribute("data-act");
-        const idx = Number(btn.getAttribute("data-idx"));
-        const cart2 = loadCart();
-        const item = cart2[idx];
-        if (!item) return;
-
-        if (act === "inc") item.count = (Number(item.count)||1) + 1;
-        if (act === "dec") item.count = Math.max(1, (Number(item.count)||1) - 1);
-        if (act === "del") cart2.splice(idx, 1);
-
-        saveCart(cart2);
-        renderCartModal();
-        updateButtonsUI();
-      };
+    // bind buttons
+    cartItemsEl().querySelectorAll("[data-minus]").forEach(b=>{
+      b.onclick = () => changeCount(b.getAttribute("data-minus"), -1);
+    });
+    cartItemsEl().querySelectorAll("[data-plus]").forEach(b=>{
+      b.onclick = () => changeCount(b.getAttribute("data-plus"), +1);
+    });
+    cartItemsEl().querySelectorAll("[data-del]").forEach(b=>{
+      b.onclick = () => removeItem(b.getAttribute("data-del"));
     });
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
+  function ask(label, optional=false){
+    const v = prompt(label);
+    if (!optional && (!v || !String(v).trim())) return null;
+    return (v || "").trim();
   }
 
-  // --- MAIN ---
+  async function checkout(){
+    if (CART.length === 0){
+      alert("❌ Ton panier est vide");
+      return;
+    }
+
+    const delivery = ask("🚚 Livraison ou Meet-up ?");
+    if (!delivery) return;
+
+    const city = ask("🏙️ Ville / Région ?");
+    if (!city) return;
+
+    const needAddress = delivery.toLowerCase().includes("liv");
+    const address = needAddress ? ask("📍 Adresse de livraison ?") : "-";
+    if (needAddress && !address) return;
+
+    const payment = ask("💳 Moyen de paiement ?");
+    if (!payment) return;
+
+    const name = ask("👤 Ton prénom ?");
+    if (!name) return;
+
+    const phone = ask("📞 Ton téléphone ?");
+    if (!phone) return;
+
+    const note = ask("📝 Note (optionnel) ?", true) || "-";
+
+    const res = await sendOrderToTelegram({
+      products: CART.map(it => ({
+        product: it.product,
+        qty: it.qtyLabel,
+        price: it.price,
+        count: it.count
+      })),
+      delivery,
+      city,
+      address,
+      payment,
+      customer_name: name,
+      customer_phone: phone,
+      note
+    });
+
+    if (res.ok){
+      alert("✅ Commande envoyée !");
+      CART = [];
+      saveCart();
+      closeCart();
+    } else {
+      alert("❌ Erreur d'envoi (regarde la console / Vercel logs)");
+      console.error(res);
+    }
+  }
+
+  // ---- MAIN page ----
   (async () => {
+    // bind panier UI
+    document.getElementById("cartBtn").onclick = openCart;
+    document.getElementById("cartClose").onclick = closeCart;
+    document.getElementById("cartModal").onclick = (e) => { if (e.target.id === "cartModal") closeCart(); };
+    document.getElementById("cartClear").onclick = () => { CART = []; saveCart(); };
+    document.getElementById("cartCheckout").onclick = checkout;
+
+    // load data
     const res = await fetch("products.json", { cache: "no-store" });
     DATA = await res.json();
 
     const id = qs("id");
     product = DATA.products.find(p => String(p.id) === String(id));
 
-    if (!product) {
+    if (!product){
       document.body.innerHTML = `<div style="padding:20px">Produit introuvable. <a href="index.html">Retour</a></div>`;
       return;
     }
 
-    // Remplir la page produit
+    // fill product UI (tes ids existants)
     document.getElementById("vid").src = product.video || "";
     document.getElementById("catPill").textContent = product.category || "";
     document.getElementById("brandPill").textContent = product.brand || "";
     document.getElementById("name").textContent = product.name || "";
     document.getElementById("desc").textContent = product.description || "";
 
-    // Boutons prix -> ajout panier
-    const variantsEl = document.getElementById("variants");
-    variantsEl.innerHTML = "";
+    // render variants buttons
+    const variants = document.getElementById("variants");
+    variants.innerHTML = "";
 
     product.variants.forEach(v => {
       const b = document.createElement("button");
       b.className = "btn";
-      b.textContent = `${v.label} ${formatPrice(v.price)}`;
+      b.textContent = `${v.label}  ${formatPrice(v.price)}`;
 
+      // ✅ CLIC PRIX = AJOUT AU PANIER (pas d'envoi Telegram ici)
       b.onclick = () => {
-        const cart = loadCart();
-        cart.push({
+        addToCart({
+          productId: product.id,
           product: product.name,
-          qty: v.label,
-          price: v.price,
-          count: 1
+          qtyLabel: v.label,
+          price: Number(v.price || 0)
         });
-        saveCart(cart);
-
-        updateButtonsUI();
-
-        alert(
-          `🛒 Ajouté au panier ✅\n\n` +
-          `Produit : ${product.name}\n` +
-          `Quantité : ${v.label}\n` +
-          `Prix : ${v.price}€`
-        );
       };
 
-      variantsEl.appendChild(b);
+      variants.appendChild(b);
     });
 
-    updateButtonsUI();
-
-    // Checkout (sans envoi)
-    document.getElementById("orderBtn").onclick = async () => {
-      const cart = loadCart();
-      if (!cart.length) {
-        alert("❌ Ton panier est vide");
-        return;
-      }
-
-      // petit récap avant
-      const recap = cart.map((it, i) => `${i+1}. ${it.product} — ${it.qty} — ${it.price}€ x${it.count || 1}`).join("\n");
-      const ok = confirm("✅ Récap panier :\n\n" + recap + "\n\nContinuer ?");
-      if (!ok) return;
-
-      const delivery = prompt("🚚 Livraison ou Meet-up ?");
-      if (!delivery) return;
-
-      const city = prompt("🏙️ Ville / Région ?");
-      if (!city) return;
-
-      const address = (delivery.toLowerCase().includes("liv"))
-        ? prompt("📍 Adresse de livraison ?")
-        : "-";
-
-      const payment = prompt("💳 Moyen de paiement ?");
-      if (!payment) return;
-
-      const name = prompt("👤 Ton prénom ?");
-      if (!name) return;
-
-      const phone = prompt("📞 Ton téléphone ?");
-      if (!phone) return;
-
-      const order = {
-        products: cart,
-        delivery,
-        city,
-        address: address || "-",
-        payment,
-        customer_name: name,
-        customer_phone: phone,
-        note: "Commande multi-produits via mini-app"
-      };
-
-      // ICI: pas d’envoi (conforme)
-      console.log("ORDER_READY", order);
-      alert("✅ Commande prête (voir console).");
-
-      // Optionnel: vider panier après confirmation
-      saveCart([]);
-      updateButtonsUI();
+    // bouton "Commander via Telegram" = ouvre panier + checkout
+    document.getElementById("orderBtn").onclick = () => {
+      openCart();
     };
+
+    // first render
+    renderCart();
   })();
 </script>
 </body>
