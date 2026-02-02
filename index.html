@@ -3,107 +3,472 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini-App</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Accueil</title>
+  <style>
+    body{margin:0;font-family:Arial;background:#0b0f14;color:#fff}
+    .wrap{max-width:980px;margin:0 auto;padding:14px 14px 90px}
+    h1{margin:8px 0 14px;font-size:22px}
+
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+    .card{
+      background:#121a24;border:1px solid #243244;border-radius:18px;
+      overflow:hidden;text-decoration:none;color:#fff;display:block;
+    }
+    .thumb{aspect-ratio:16/10;background:#000}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .pbody{padding:12px}
+    .ptitle{font-weight:900;font-size:16px;margin-bottom:8px}
+    .pline{opacity:.85;font-size:13px}
+
+    /* ===== PANIER (INDEX) ===== */
+    .cartIcon{
+      position: fixed;
+      top: 110px;
+      right: 14px;
+      z-index: 9999;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(20,20,26,.85);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(12px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .cartBadge{
+      position:absolute;
+      top:-8px;
+      right:-8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background:#ff3b30;
+      color:#fff;
+      font-weight: 900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 2px solid rgba(20,20,26,.95);
+    }
+
+    .cartModal{
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,.55);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .cartModal.hidden{ display:none; }
+
+    .cartSheet{
+      width: min(520px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: rgba(20,20,26,.95);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px 18px 0 0;
+      padding: 14px;
+      backdrop-filter: blur(14px);
+      color: #fff;
+    }
+
+    .cartHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 10px;
+    }
+    .cartTitle{ font-size: 26px; font-weight: 900; }
+    .cartClose{
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .cartItems{ display:flex; flex-direction:column; gap: 10px; margin: 10px 0 14px; }
+
+    .cartItem{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .cartItemLeft{ display:flex; flex-direction:column; gap: 6px; }
+    .cartItemName{ font-weight: 900; }
+    .cartItemSub{ opacity: .85; font-size: 14px; }
+
+    .cartItemRight{ display:flex; align-items:center; gap: 10px; }
+    .qtyBtn{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight: 900;
+      cursor:pointer;
+    }
+    .qtyVal{ min-width: 22px; text-align:center; font-weight: 900; }
+    .trashBtn{
+      width: 40px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+    }
+
+    .cartTotalRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .cartTotal{ font-size: 26px; font-weight: 900; color: #2d8cff; }
+
+    .cartSectionTitle{
+      margin: 6px 0 10px;
+      font-weight: 900;
+      opacity: .95;
+    }
+    .cartRadios{ display:flex; gap: 16px; margin-bottom: 12px; }
+    .radioLine{ display:flex; gap: 10px; align-items:center; font-weight: 800; }
+
+    .cartForm{ display:flex; flex-direction:column; gap: 10px; margin-bottom: 12px; }
+    .cartInput, .cartTextarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      outline: none;
+    }
+    .cartTextarea{ min-height: 80px; resize: vertical; }
+    .hidden{ display:none; }
+
+    .cartConfirm{
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 0;
+      background: #2d8cff;
+      color: #071021;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    /* ===== /PANIER (INDEX) ===== */
+  </style>
 </head>
 <body>
-
- <div class="top">
-  <video class="banner-video" autoplay muted loop playsinline>
-    <source src="https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/7bdc0fceef84572dfd89841c408dedc5da40c9bc/IMG_9955.MP4">
-  </video>
-
-  <div class="logo">
-    <img id="shopLogo"
-      src="https://raw.githubusercontent.com/lulu2100/Sonic-MiniApp/907551737b83eed871d3728f82148619b58f1961/IMAGE%202026-01-28%2000%3A02%3A50.jpg"
-      alt="Logo SonicCoffee">
+  <div class="wrap">
+    <h1>Articles disponibles</h1>
+    <div id="grid" class="grid"></div>
   </div>
 
-  <div id="shopName" class="shop-name">SonicCoffee</div>
-</div>
-
-<div class="filters">
-  <select id="catSelect"><option value="">Toutes les catégories</option></select>
-  <select id="brandSelect"><option value="">Toutes les farms</option></select>
-</div>
-
-<div class="grid" id="grid"></div>
-<div class="spacer"></div>
-
-  <div class="bottom-bar">
-    <div class="tab"><b>Menu</b></div>
-    <div class="tab"><b>Infos</b></div>
-    <div class="tab"><b>Canal</b></div>
-    <div class="tab"><b>Contact</b></div>
+  <!-- ===== PANIER (INDEX) ===== -->
+  <div id="cartIcon" class="cartIcon" title="Panier">
+    🛒
+    <div id="cartBadge" class="cartBadge">0</div>
   </div>
+
+  <div id="cartModal" class="cartModal hidden">
+    <div class="cartSheet">
+      <div class="cartHeader">
+        <div class="cartTitle">Votre Panier</div>
+        <button id="cartClose" class="cartClose">✕</button>
+      </div>
+
+      <div id="cartItems" class="cartItems"></div>
+
+      <div class="cartTotalRow">
+        <div>Total :</div>
+        <div id="cartTotal" class="cartTotal">0.00 €</div>
+      </div>
+
+      <div class="cartSectionTitle">Sélectionnez votre type de commande :</div>
+      <div class="cartRadios">
+        <label class="radioLine">
+          <input type="radio" name="deliveryType" value="Meetup" checked />
+          <span>Meetup</span>
+        </label>
+        <label class="radioLine">
+          <input type="radio" name="deliveryType" value="Livraison" />
+          <span>Livraison</span>
+        </label>
+      </div>
+
+      <div class="cartForm">
+        <input id="cityInput" class="cartInput" placeholder="Ville / Région" />
+        <input id="addressInput" class="cartInput hidden" placeholder="Adresse (si livraison)" />
+        <input id="paymentInput" class="cartInput" placeholder="Moyen de paiement" />
+        <input id="nameInput" class="cartInput" placeholder="Ton prénom" />
+        <input id="phoneInput" class="cartInput" placeholder="Ton téléphone" />
+        <textarea id="noteInput" class="cartTextarea" placeholder="Note (optionnel)"></textarea>
+      </div>
+
+      <button id="confirmBtn" class="cartConfirm">Confirmer la commande</button>
+    </div>
+  </div>
+  <!-- ===== /PANIER (INDEX) ===== -->
 
 <script>
-  let DATA;
-  function uniq(arr){ return [...new Set(arr.filter(Boolean))].sort(); }
+const CART_KEY = "sonic_cart_v1";
+const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
 
-  function render(){
-    const cat = document.getElementById('catSelect').value;
-    const brand = document.getElementById('brandSelect').value;
+function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { return []; } }
+function saveCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+function cartCount(cart){ return cart.reduce((sum, it) => sum + (it.count || 1), 0); }
+function cartTotal(cart){ return cart.reduce((sum, it) => sum + ((Number(it.price)||0) * (it.count || 1)), 0); }
+function makeKey(item){ return `${item.product}__${item.qty}__${Number(item.price)||0}`; }
 
-    const list = DATA.products.filter(p=>{
-      if(cat && p.category!==cat) return false;
-      if(brand && p.brand!==brand) return false;
-      return true;
+async function sendOrderToTelegram(order) {
+  try {
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
     });
+    const data = await r.json().catch(() => ({}));
+    return { ok: r.ok, data };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+}
 
-    const grid = document.getElementById('grid');
-    grid.innerHTML = "";
+function getDeliveryType(){
+  const el = document.querySelector('input[name="deliveryType"]:checked');
+  return el ? el.value : "Meetup";
+}
 
-    list.forEach(p=>{
-      const card = document.createElement('div');
-      card.className = "card";
-      card.onclick = ()=> location.href = `product.html?id=${encodeURIComponent(p.id)}`;
+function openCart(){
+  document.getElementById("cartModal").classList.remove("hidden");
+  renderCart();
+}
+function closeCart(){
+  document.getElementById("cartModal").classList.add("hidden");
+}
 
-      card.innerHTML = `
-        <div class="tag">🏷️ ${p.category || ""}</div>
-        <div class="img"><img src="${p.image || ""}" alt=""></div>
-        <div class="body">
-          <p class="name">${p.name || ""}</p>
-          <p class="sub">🕵️ ${p.brand || ""}</p>
-        </div>
-      `;
-      grid.appendChild(card);
+function renderCart(){
+  const cart = loadCart();
+
+  // badge
+  document.getElementById("cartBadge").textContent = String(cartCount(cart));
+
+  const wrap = document.getElementById("cartItems");
+  wrap.innerHTML = "";
+
+  if (cart.length === 0) {
+    const empty = document.createElement("div");
+    empty.style.opacity = ".85";
+    empty.style.padding = "10px";
+    empty.textContent = "Ton panier est vide.";
+    wrap.appendChild(empty);
+  } else {
+    cart.forEach((it) => {
+      const row = document.createElement("div");
+      row.className = "cartItem";
+
+      const left = document.createElement("div");
+      left.className = "cartItemLeft";
+
+      const title = document.createElement("div");
+      title.className = "cartItemName";
+      title.textContent = it.product || "-";
+
+      const sub = document.createElement("div");
+      sub.className = "cartItemSub";
+      sub.textContent = `${it.qty || "-"} — ${Number(it.price)||0} € / unité`;
+
+      left.appendChild(title);
+      left.appendChild(sub);
+
+      const right = document.createElement("div");
+      right.className = "cartItemRight";
+
+      const minus = document.createElement("button");
+      minus.className = "qtyBtn";
+      minus.textContent = "−";
+      minus.onclick = () => {
+        const c = loadCart();
+        const key = makeKey(it);
+        const idx = c.findIndex(x => makeKey(x) === key);
+        if (idx >= 0) {
+          c[idx].count = (c[idx].count || 1) - 1;
+          if (c[idx].count <= 0) c.splice(idx, 1);
+          saveCart(c);
+          renderCart();
+        }
+      };
+
+      const qty = document.createElement("div");
+      qty.className = "qtyVal";
+      qty.textContent = String(it.count || 1);
+
+      const plus = document.createElement("button");
+      plus.className = "qtyBtn";
+      plus.textContent = "+";
+      plus.onclick = () => {
+        const c = loadCart();
+        const key = makeKey(it);
+        const idx = c.findIndex(x => makeKey(x) === key);
+        if (idx >= 0) {
+          c[idx].count = (c[idx].count || 1) + 1;
+          saveCart(c);
+          renderCart();
+        }
+      };
+
+      const trash = document.createElement("button");
+      trash.className = "trashBtn";
+      trash.textContent = "🗑️";
+      trash.onclick = () => {
+        const c = loadCart();
+        const key = makeKey(it);
+        saveCart(c.filter(x => makeKey(x) !== key));
+        renderCart();
+      };
+
+      right.appendChild(minus);
+      right.appendChild(qty);
+      right.appendChild(plus);
+      right.appendChild(trash);
+
+      row.appendChild(left);
+      row.appendChild(right);
+
+      wrap.appendChild(row);
     });
   }
 
-  (async ()=>{
-    const res = await fetch('products.json', {cache:'no-store'});
-    DATA = await res.json();
+  // total
+  document.getElementById("cartTotal").textContent = `${cartTotal(cart).toFixed(2)} €`;
 
-    document.getElementById('shopName').textContent = DATA.shopName || "Mini-App";
-    document.getElementById('shopLogo').src = DATA.shopLogo || document.getElementById('shopLogo').src;
-    
-    const cats = uniq(DATA.products.map(p=>p.category));
-    const brands = uniq(DATA.products.map(p=>p.brand));
+  // show/hide address
+  const delivery = getDeliveryType();
+  const address = document.getElementById("addressInput");
+  if (delivery === "Livraison") address.classList.remove("hidden");
+  else address.classList.add("hidden");
+}
 
-    const catSelect = document.getElementById('catSelect');
-    cats.forEach(c=>{
-      const o = document.createElement('option'); o.value=c; o.textContent=c;
-      catSelect.appendChild(o);
-    });
+async function loadProducts(){
+  const res = await fetch("products.json", { cache: "no-store" });
+  const data = await res.json();
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
 
-    const brandSelect = document.getElementById('brandSelect');
-    brands.forEach(b=>{
-      const o = document.createElement('option'); o.value=b; o.textContent=b;
-      brandSelect.appendChild(o);
-    });
+  (data.products || []).forEach(p => {
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = `product.html?id=${encodeURIComponent(p.id)}`;
 
-    catSelect.onchange = render;
-    brandSelect.onchange = render;
+    a.innerHTML = `
+      <div class="thumb">
+        <img src="${p.image || ""}" alt="">
+      </div>
+      <div class="pbody">
+        <div class="ptitle">${p.name || ""}</div>
+        <div class="pline">${p.category || ""} • ${p.brand || ""}</div>
+      </div>
+    `;
+    grid.appendChild(a);
+  });
+}
 
-    render();
-  })();
-  document.addEventListener('touchstart', () => {
-  const v = document.querySelector('.banner-video');
-  if (v) v.play();
-}, { once: true });
-  
+(function init(){
+  // panier events
+  document.getElementById("cartIcon").onclick = openCart;
+  document.getElementById("cartClose").onclick = closeCart;
+
+  document.getElementById("cartModal").addEventListener("click", (e) => {
+    if (e.target.id === "cartModal") closeCart();
+  });
+
+  document.addEventListener("change", (e) => {
+    if (e.target && e.target.name === "deliveryType") renderCart();
+  });
+
+  document.getElementById("confirmBtn").onclick = async () => {
+    const cart = loadCart();
+    if (cart.length === 0) { alert("❌ Panier vide"); return; }
+
+    const delivery = getDeliveryType();
+    const city = document.getElementById("cityInput").value.trim();
+    const address = document.getElementById("addressInput").value.trim();
+    const payment = document.getElementById("paymentInput").value.trim();
+    const customer_name = document.getElementById("nameInput").value.trim();
+    const customer_phone = document.getElementById("phoneInput").value.trim();
+    const note = document.getElementById("noteInput").value.trim();
+
+    if (!city) { alert("❌ Ville / Région obligatoire"); return; }
+    if (delivery === "Livraison" && !address) { alert("❌ Adresse obligatoire"); return; }
+    if (!payment) { alert("❌ Moyen de paiement obligatoire"); return; }
+    if (!customer_name) { alert("❌ Prénom obligatoire"); return; }
+    if (!customer_phone) { alert("❌ Téléphone obligatoire"); return; }
+
+    const payload = {
+      products: cart.map(it => ({
+        product: it.product,
+        qty: it.qty,
+        price: Number(it.price) || 0,
+        count: it.count || 1,
+      })),
+      delivery,
+      city,
+      address: delivery === "Livraison" ? address : "-",
+      payment,
+      customer_name,
+      customer_phone,
+      note: note || "Commande via mini-app",
+      total: cartTotal(cart)
+    };
+
+    const btn = document.getElementById("confirmBtn");
+    btn.disabled = true;
+    btn.textContent = "Envoi en cours...";
+
+    const result = await sendOrderToTelegram(payload);
+
+    btn.disabled = false;
+    btn.textContent = "Confirmer la commande";
+
+    if (result.ok) {
+      alert("✅ Commande envoyée !");
+      saveCart([]);
+      renderCart();
+      closeCart();
+    } else {
+      alert("❌ Erreur d’envoi. Vérifie les logs Vercel / API.");
+      console.log(result);
+    }
+  };
+
+  // init badge + products
+  renderCart();
+  loadProducts();
+
+  // si on arrive depuis product.html?openCart=1 => ouvrir panier direct
+  const params = new URLSearchParams(location.search);
+  if (params.get("openCart") === "1") openCart();
+})();
 </script>
 </body>
 </html>
