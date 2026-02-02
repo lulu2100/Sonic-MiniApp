@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Produit</title>
-
   <style>
     body{margin:0;font-family:Arial;background:#0b0f14;color:#fff}
     .wrap{max-width:900px;margin:0 auto;padding:14px 14px 30px}
@@ -18,170 +17,55 @@
     .pill{display:inline-flex;align-items:center;gap:6px;background:#0f1722;border:1px solid #2b3c51;border-radius:999px;padding:6px 10px;font-size:12px;opacity:.95}
     h1{margin:10px 0 6px;font-size:28px}
     .desc{opacity:.85;white-space:pre-line;line-height:1.4}
-    .variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-    .btn{background:#0f1722;border:1px solid #2b3c51;border-radius:999px;padding:12px 14px;color:#9ad1ff;font-weight:700;cursor:pointer}
-    .cta{margin-top:12px;background:#2b8cff;border:0;color:#fff;border-radius:999px;padding:14px 16px;font-weight:800;width:100%;cursor:pointer}
-    @media(max-width:420px){ .variants{grid-template-columns:1fr} }
 
-    /* UTIL */
-    .hidden{display:none !important;}
-
-    /* ===== PANIER UI (comme photos 2-3-4) ===== */
-    .cartFab{
-      position: fixed;
-      top: 110px;
-      right: 14px;
-      z-index: 9999;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(20,20,26,.80);
-      border: 1px solid rgba(255,255,255,.12);
-      color: #fff;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      font-weight: 800;
-      user-select:none;
-    }
-    .cartCount{
-      min-width: 26px;
-      height: 22px;
-      padding: 0 8px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #2d8cff;
-      color: #0b1220;
-      font-weight: 900;
-    }
-
-    .cartModal{
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: rgba(0,0,0,.55);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .cartSheet{
-      width: min(520px, 100%);
-      max-height: 92vh;
-      overflow: auto;
-      background: rgba(20,20,26,.95);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 18px 18px 0 0;
+    /* Variantes style “photo 2” */
+    .vlist{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+    .vrow{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
       padding: 14px;
-      backdrop-filter: blur(14px);
-      color: #fff;
-    }
-
-    .cartHeader{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      margin-bottom: 10px;
+      gap:12px;
     }
-    .cartTitle{ font-size: 28px; font-weight: 900; }
-    .cartClose{
-      border: 0;
-      background: transparent;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-      padding: 6px 10px;
-    }
+    .vleft{display:flex;flex-direction:column;gap:6px}
+    .vlabel{font-weight:900;font-size:18px}
+    .vprice{opacity:.85}
 
-    .cartItems{ display:flex; flex-direction:column; gap: 10px; margin: 10px 0 14px; }
-
-    .cartItem{
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      padding: 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
-    .cartItemLeft{ display:flex; flex-direction:column; gap: 6px; }
-    .cartItemName{ font-weight: 900; }
-    .cartItemSub{ opacity: .85; font-size: 14px; }
-
-    .cartItemRight{ display:flex; align-items:center; gap: 10px; }
-    .qtyBtn{
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
+    .vright{display:flex;align-items:center;gap:10px}
+    .qtyInput{
+      width:64px;height:40px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
       color:#fff;
-      font-weight: 900;
-      cursor:pointer;
+      text-align:center;
+      font-weight:900;
+      outline:none;
     }
-    .qtyVal{ min-width: 22px; text-align:center; font-weight: 900; }
-    .trashBtn{
-      width: 40px;
-      height: 34px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:#fff;
+    .addBtn{
+      height:40px;
+      padding:0 16px;
+      border-radius:12px;
+      border:0;
+      background:#2d8cff;
+      color:#071021;
+      font-weight:900;
       cursor:pointer;
     }
 
-    .cartTotalRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      padding: 12px;
-      margin-bottom: 12px;
-      font-weight: 900;
+    .cta{
+      margin-top:12px;
+      background:#2b8cff;
+      border:0;color:#fff;border-radius:999px;
+      padding:14px 16px;font-weight:800;width:100%;
+      cursor:pointer;
+      display:block;text-align:center;
     }
-    .cartTotal{ font-size: 28px; font-weight: 900; color: #2d8cff; }
-
-    .cartSectionTitle{
-      margin: 6px 0 10px;
-      font-weight: 900;
-      opacity: .95;
-    }
-    .cartRadios{ display:flex; gap: 16px; margin-bottom: 12px; }
-    .radioLine{ display:flex; gap: 10px; align-items:center; font-weight: 800; }
-
-    .cartForm{ display:flex; flex-direction:column; gap: 10px; margin-bottom: 12px; }
-    .cartInput, .cartTextarea{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-      outline: none;
-    }
-    .cartTextarea{ min-height: 80px; resize: vertical; }
-
-    .cartConfirm{
-      width: 100%;
-      padding: 14px 14px;
-      border-radius: 14px;
-      border: 0;
-      background: #2d8cff;
-      color: #071021;
-      font-weight: 900;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    /* ===== /PANIER UI ===== */
   </style>
 </head>
-
 <body>
   <div class="wrap">
     <a class="back" href="index.html">← Retour</a>
@@ -190,7 +74,6 @@
       <div class="video">
         <video id="vid" controls playsinline></video>
       </div>
-
       <div class="content">
         <div class="row">
           <div class="pill" id="catPill"></div>
@@ -200,375 +83,106 @@
         <h1 id="name"></h1>
         <div class="desc" id="desc"></div>
 
-        <div class="variants" id="variants"></div>
+        <div class="vlist" id="variants"></div>
 
-        <!-- Bouton principal (ouvre le panier) -->
-        <button class="cta" id="orderLink" type="button">Commander via Telegram</button>
+        <!-- IMPORTANT : ce bouton renvoie vers index.html et ouvre le panier -->
+        <a class="cta" id="orderLink" href="index.html?openCart=1">Commander via Telegram</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== PANIER (UI) ===== -->
-  <div id="cartFab" class="cartFab" title="Panier">
-    🛒 <span>Panier</span>
-    <span id="cartCount" class="cartCount">0</span>
-  </div>
+<script>
+let DATA, product;
+const CART_KEY = "sonic_cart_v1";
 
-  <div id="cartModal" class="cartModal hidden">
-    <div class="cartSheet">
-      <div class="cartHeader">
-        <div class="cartTitle">Votre Panier</div>
-        <button id="cartClose" class="cartClose" type="button">✕</button>
-      </div>
+function qs(k){ return new URLSearchParams(location.search).get(k); }
+function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { return []; } }
+function saveCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+function makeKey(item){ return `${item.product}__${item.qty}__${Number(item.price)||0}`; }
 
-      <div id="cartItems" class="cartItems"></div>
+function addToCart(item, countToAdd){
+  const cart = loadCart();
+  const key = makeKey(item);
+  const idx = cart.findIndex(x => makeKey(x) === key);
 
-      <div class="cartTotalRow">
-        <div>Total :</div>
-        <div id="cartTotal" class="cartTotal">0.00 €</div>
-      </div>
+  if (idx >= 0) cart[idx].count = (cart[idx].count || 1) + countToAdd;
+  else cart.push({ ...item, count: countToAdd });
 
-      <div class="cartSectionTitle">Sélectionnez votre type de commande :</div>
-      <div class="cartRadios">
-        <label class="radioLine">
-          <input type="radio" name="deliveryType" value="Meetup" checked />
-          <span>Meetup</span>
-        </label>
-        <label class="radioLine">
-          <input type="radio" name="deliveryType" value="Livraison" />
-          <span>Livraison</span>
-        </label>
-      </div>
+  saveCart(cart);
 
-      <div class="cartForm">
-        <input id="cityInput" class="cartInput" placeholder="Ville / Région" />
-        <input id="addressInput" class="cartInput hidden" placeholder="Adresse (si livraison)" />
-        <input id="paymentInput" class="cartInput" placeholder="Moyen de paiement" />
-        <input id="nameInput" class="cartInput" placeholder="Ton prénom" />
-        <input id="phoneInput" class="cartInput" placeholder="Ton téléphone" />
-        <textarea id="noteInput" class="cartTextarea" placeholder="Note (optionnel)"></textarea>
-      </div>
+  alert(`🛒 Ajouté ✅\n\nProduit : ${item.product}\nVariante : ${item.qty}\nPrix : ${item.price}€\nNombre : ${countToAdd}`);
+}
 
-      <button id="confirmBtn" class="cartConfirm" type="button">Confirmer la commande</button>
-    </div>
-  </div>
-  <!-- ===== /PANIER (UI) ===== -->
+(async () => {
+  const res = await fetch("products.json", { cache: "no-store" });
+  DATA = await res.json();
 
-  <script>
-    let DATA, product;
+  const id = qs("id");
+  product = (DATA.products || []).find(p => String(p.id) === String(id));
 
-    // ===== CONFIG =====
-    const CART_KEY = "sonic_cart_v1";
-    const API_URL = "https://sonic-telegram-bot.vercel.app/api/telegram";
+  if (!product) {
+    document.body.innerHTML = "<p>Produit introuvable</p>";
+    return;
+  }
 
-    // ===== UTILS =====
-    function qs(k){ return new URLSearchParams(location.search).get(k); }
-    function formatPrice(n){ return `${Number(n) || 0}€`; }
+  const vid = document.getElementById("vid");
+  if (vid) vid.src = product.video || "";
 
-    function loadCart(){
-      try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
-      catch { return []; }
-    }
-    function saveCart(cart){
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }
-    function cartCount(cart){
-      return cart.reduce((sum, it) => sum + (it.count || 1), 0);
-    }
-    function cartTotal(cart){
-      return cart.reduce((sum, it) => sum + ((Number(it.price)||0) * (it.count || 1)), 0);
-    }
-    function makeKey(item){
-      return `${item.product}__${item.qty}`;
-    }
+  const catPill = document.getElementById("catPill");
+  if (catPill) catPill.textContent = product.category || "";
 
-    // ===== API =====
-    async function sendOrderToTelegram(order) {
-      try {
-        const r = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(order),
-        });
-        const data = await r.json().catch(() => ({}));
-        if (!r.ok) return { ok:false, data };
-        return { ok:true, data };
-      } catch (e) {
-        return { ok:false, error:String(e) };
-      }
-    }
+  const brandPill = document.getElementById("brandPill");
+  if (brandPill) brandPill.textContent = product.brand || "";
 
-    // ===== UI refs =====
-    const cartFab = () => document.getElementById("cartFab");
-    const cartCountEl = () => document.getElementById("cartCount");
-    const cartModal = () => document.getElementById("cartModal");
-    const cartClose = () => document.getElementById("cartClose");
-    const cartItemsEl = () => document.getElementById("cartItems");
-    const cartTotalEl = () => document.getElementById("cartTotal");
+  const nameEl = document.getElementById("name");
+  if (nameEl) nameEl.textContent = product.name || "";
 
-    const cityInput = () => document.getElementById("cityInput");
-    const addressInput = () => document.getElementById("addressInput");
-    const paymentInput = () => document.getElementById("paymentInput");
-    const nameInput = () => document.getElementById("nameInput");
-    const phoneInput = () => document.getElementById("phoneInput");
-    const noteInput = () => document.getElementById("noteInput");
-    const confirmBtn = () => document.getElementById("confirmBtn");
+  const descEl = document.getElementById("desc");
+  if (descEl) descEl.textContent = product.description || "";
 
-    function getDeliveryType(){
-      const el = document.querySelector('input[name="deliveryType"]:checked');
-      return el ? el.value : "Meetup";
-    }
+  const variants = document.getElementById("variants");
+  variants.innerHTML = "";
 
-    // ===== CART RENDER =====
-    function renderCart(){
-      const cart = loadCart();
+  (product.variants || []).forEach(v => {
+    const row = document.createElement("div");
+    row.className = "vrow";
 
-      // badge
-      cartCountEl().textContent = String(cartCount(cart));
+    const left = document.createElement("div");
+    left.className = "vleft";
+    left.innerHTML = `
+      <div class="vlabel">${v.label}</div>
+      <div class="vprice">${Number(v.price)||0} €</div>
+    `;
 
-      // items list
-      cartItemsEl().innerHTML = "";
+    const right = document.createElement("div");
+    right.className = "vright";
 
-      if (cart.length === 0) {
-        const empty = document.createElement("div");
-        empty.style.opacity = ".85";
-        empty.style.padding = "10px";
-        empty.textContent = "Ton panier est vide.";
-        cartItemsEl().appendChild(empty);
-      } else {
-        cart.forEach((it) => {
-          const row = document.createElement("div");
-          row.className = "cartItem";
+    const qty = document.createElement("input");
+    qty.className = "qtyInput";
+    qty.type = "number";
+    qty.min = "1";
+    qty.value = "1";
 
-          const left = document.createElement("div");
-          left.className = "cartItemLeft";
+    const add = document.createElement("button");
+    add.className = "addBtn";
+    add.textContent = "Ajouter";
+    add.onclick = () => {
+      const n = Math.max(1, parseInt(qty.value || "1", 10));
+      addToCart({
+        product: product.name,
+        qty: v.label,
+        price: Number(v.price) || 0,
+      }, n);
+    };
 
-          const title = document.createElement("div");
-          title.className = "cartItemName";
-          title.textContent = it.product || "-";
+    right.appendChild(qty);
+    right.appendChild(add);
 
-          const sub = document.createElement("div");
-          sub.className = "cartItemSub";
-          sub.textContent = `${it.qty || "-"} — ${formatPrice(it.price)} / unité`;
-
-          left.appendChild(title);
-          left.appendChild(sub);
-
-          const right = document.createElement("div");
-          right.className = "cartItemRight";
-
-          const minus = document.createElement("button");
-          minus.className = "qtyBtn";
-          minus.type = "button";
-          minus.textContent = "−";
-          minus.onclick = () => {
-            const c = loadCart();
-            const key = makeKey(it);
-            const idx = c.findIndex(x => makeKey(x) === key);
-            if (idx >= 0) {
-              c[idx].count = (c[idx].count || 1) - 1;
-              if (c[idx].count <= 0) c.splice(idx, 1);
-              saveCart(c);
-              renderCart();
-            }
-          };
-
-          const qty = document.createElement("div");
-          qty.className = "qtyVal";
-          qty.textContent = String(it.count || 1);
-
-          const plus = document.createElement("button");
-          plus.className = "qtyBtn";
-          plus.type = "button";
-          plus.textContent = "+";
-          plus.onclick = () => {
-            const c = loadCart();
-            const key = makeKey(it);
-            const idx = c.findIndex(x => makeKey(x) === key);
-            if (idx >= 0) {
-              c[idx].count = (c[idx].count || 1) + 1;
-              saveCart(c);
-              renderCart();
-            }
-          };
-
-          const trash = document.createElement("button");
-          trash.className = "trashBtn";
-          trash.type = "button";
-          trash.textContent = "🗑️";
-          trash.onclick = () => {
-            const c = loadCart();
-            const key = makeKey(it);
-            saveCart(c.filter(x => makeKey(x) !== key));
-            renderCart();
-          };
-
-          right.appendChild(minus);
-          right.appendChild(qty);
-          right.appendChild(plus);
-          right.appendChild(trash);
-
-          row.appendChild(left);
-          row.appendChild(right);
-
-          cartItemsEl().appendChild(row);
-        });
-      }
-
-      // total
-      cartTotalEl().textContent = `${cartTotal(cart).toFixed(2)} €`;
-
-      // adresse visible seulement si livraison
-      const delivery = getDeliveryType();
-      if (delivery === "Livraison") addressInput().classList.remove("hidden");
-      else addressInput().classList.add("hidden");
-    }
-
-    function openCart(){
-      cartModal().classList.remove("hidden");
-      renderCart();
-    }
-    function closeCartModal(){
-      cartModal().classList.add("hidden");
-    }
-
-    // ===== ADD TO CART =====
-    function addToCart(item){
-      const cart = loadCart();
-      const key = makeKey(item);
-      const idx = cart.findIndex(x => makeKey(x) === key);
-
-      if (idx >= 0) cart[idx].count = (cart[idx].count || 1) + 1;
-      else cart.push({ ...item, count: 1 });
-
-      saveCart(cart);
-      renderCart();
-
-      alert(`🛒 Ajouté au panier ✅\n\nProduit : ${item.product}\nQuantité : ${item.qty}\nPrix : ${item.price}€`);
-    }
-
-    // ===== MAIN =====
-    (async () => {
-      // bind UI
-      cartFab().onclick = openCart;
-      cartClose().onclick = closeCartModal;
-
-      // click outside sheet closes
-      cartModal().addEventListener("click", (e) => {
-        if (e.target === cartModal()) closeCartModal();
-      });
-
-      // toggle address on delivery change
-      document.addEventListener("change", (e) => {
-        if (e.target && e.target.name === "deliveryType") renderCart();
-      });
-
-      // load data
-      const res = await fetch("products.json", { cache: "no-store" });
-      DATA = await res.json();
-
-      const id = qs("id");
-      product = (DATA.products || []).find(p => String(p.id) === String(id));
-
-      if (!product) {
-        document.body.innerHTML = "<p>Produit introuvable</p>";
-        return;
-      }
-
-      // fill page fields
-      const vid = document.getElementById("vid");
-      if (vid) vid.src = product.video || "";
-
-      const catPill = document.getElementById("catPill");
-      if (catPill) catPill.textContent = product.category || "";
-
-      const brandPill = document.getElementById("brandPill");
-      if (brandPill) brandPill.textContent = product.brand || "";
-
-      const nameEl = document.getElementById("name");
-      if (nameEl) nameEl.textContent = product.name || "";
-
-      const descEl = document.getElementById("desc");
-      if (descEl) descEl.textContent = product.description || "";
-
-      // variants
-      const variants = document.getElementById("variants");
-      variants.innerHTML = "";
-
-      (product.variants || []).forEach(v => {
-        const b = document.createElement("button");
-        b.className = "btn";
-        b.type = "button";
-        b.textContent = `${v.label}  ${formatPrice(v.price)}`;
-        b.onclick = () => {
-          addToCart({
-            product: product.name,
-            qty: v.label,
-            price: Number(v.price) || 0,
-          });
-        };
-        variants.appendChild(b);
-      });
-
-      // button "Commander via Telegram" opens cart
-      document.getElementById("orderLink").onclick = () => openCart();
-
-      // confirm order
-      confirmBtn().onclick = async () => {
-        const cart = loadCart();
-        if (cart.length === 0) { alert("❌ Ton panier est vide"); return; }
-
-        const delivery = getDeliveryType();
-        const city = (cityInput().value || "").trim();
-        const address = (addressInput().value || "").trim();
-        const payment = (paymentInput().value || "").trim();
-        const customer_name = (nameInput().value || "").trim();
-        const customer_phone = (phoneInput().value || "").trim();
-        const note = (noteInput().value || "").trim();
-
-        if (!city) { alert("❌ Ville / Région obligatoire"); return; }
-        if (delivery === "Livraison" && !address) { alert("❌ Adresse obligatoire pour livraison"); return; }
-        if (!payment) { alert("❌ Moyen de paiement obligatoire"); return; }
-        if (!customer_name) { alert("❌ Nom obligatoire"); return; }
-        if (!customer_phone) { alert("❌ Téléphone obligatoire"); return; }
-
-        const payload = {
-          products: cart.map(it => ({
-            product: it.product,
-            qty: it.qty,
-            price: Number(it.price) || 0,
-            count: it.count || 1,
-          })),
-          delivery,
-          city,
-          address: delivery === "Livraison" ? address : "-",
-          payment,
-          customer_name,
-          customer_phone,
-          note: note || "Commande via mini-app",
-        };
-
-        confirmBtn().disabled = true;
-        confirmBtn().textContent = "Envoi en cours...";
-
-        const result = await sendOrderToTelegram(payload);
-
-        confirmBtn().disabled = false;
-        confirmBtn().textContent = "Confirmer la commande";
-
-        if (result.ok) {
-          alert("✅ Commande envoyée !");
-          saveCart([]);
-          renderCart();
-          closeCartModal();
-        } else {
-          alert("❌ Erreur d’envoi. Vérifie les logs Vercel.");
-        }
-      };
-
-      // init
-      renderCart();
-    })();
-  </script>
+    row.appendChild(left);
+    row.appendChild(right);
+    variants.appendChild(row);
+  });
+})();
+</script>
 </body>
 </html>
