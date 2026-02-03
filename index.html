@@ -438,7 +438,7 @@
         <input id="addressInput" class="cartInput hidden" placeholder="Adresse (si livraison)" />
         <input id="paymentInput" class="cartInput" placeholder="Moyen de paiement" />
         <input id="nameInput" class="cartInput" placeholder="Ton prénom" />
-        <input id="telegramInput" class="cartInput" placeholder="Ton @Telegram (ex: @pseudo)" />
+        <input id="phoneInput" class="cartInput" placeholder="Ton téléphone (ex: 06...)" inputmode="tel" />
         <textarea id="noteInput" class="cartTextarea" placeholder="Note (optionnel)"></textarea>
       </div>
 
@@ -527,7 +527,7 @@
   const addressInput = () => document.getElementById("addressInput");
   const paymentInput = () => document.getElementById("paymentInput");
   const nameInput    = () => document.getElementById("nameInput");
-  const telegramInput = () => document.getElementById("telegramInput");
+ const phoneInput = () => document.getElementById("phoneInput");
   const noteInput    = () => document.getElementById("noteInput");
   const confirmBtn   = () => document.getElementById("confirmBtn");
 
