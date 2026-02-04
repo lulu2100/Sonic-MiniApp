@@ -879,8 +879,10 @@ if (!/^[0-9+().-]{6,20}$/.test(phoneClean)) {
         if (delivery === "Livraison" && !address) { alert("❌ Adresse obligatoire pour livraison"); return; }
         if (!payment) { alert("❌ Moyen de paiement obligatoire"); return; }
         if (!customer_name) { alert("❌ Nom obligatoire"); return; }
-        if (!customer_telegram) { alert("❌ @Telegram obligatoire"); return; }
-        if (customer_telegram[0] !== "@") { alert("❌ Mets un @ au début (ex: @pseudo)"); return; }
+       if (!finalTelegram || finalTelegram === "Non fourni") {
+  alert("❌ Tu dois avoir un @Telegram défini dans Telegram (Paramètres > Nom d'utilisateur).");
+  return;
+}
 
         const payload = {
           products: cart.map(it => ({
