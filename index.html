@@ -852,6 +852,11 @@
         // ✅ Vrai Telegram (impossible à tricher)
 const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
 const realTelegram = tgUser?.username ? ("@" + tgUser.username) : "";
+        
+        if (telegramInput()) {
+  telegramInput().value = realTelegram;
+  telegramInput().readOnly = true;
+}
 
 // ✅ Téléphone (tapé par le client)
 const phone = (phoneInput()?.value || "").trim();
@@ -889,7 +894,7 @@ if (!/^[0-9+().-]{6,20}$/.test(phoneClean)) {
           address: delivery === "Livraison" ? address : "-",
           payment,
           customer_name,
-          customer_telegram,
+          customer_telegram: realTelegram,
           note: note || "Commande via mini-app",
         };
 
