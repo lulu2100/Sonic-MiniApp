@@ -859,14 +859,12 @@ const realTelegram = tgUser?.username ? ("@" + tgUser.username) : "";
   telegramInput().value = realTelegram;
   telegramInput().readOnly = true;
 }
-
+const finalTelegram =
+  realTelegram ||
+  (telegramInput()?.value || "").trim() ||
+  "Non fourni";
 // ✅ Téléphone (tapé par le client)
 const phone = (phoneInput()?.value || "").trim();
-
-if (!realTelegram) {
-  alert("❌ Tu dois avoir un @Telegram défini dans Telegram (Paramètres > Nom d'utilisateur).");
-  return;
-}
 
 if (!phone) { alert("❌ Téléphone obligatoire"); return; }
 
